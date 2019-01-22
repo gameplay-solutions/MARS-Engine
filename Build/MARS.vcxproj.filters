@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="E:\Source Control\MARS\Engine\MARS.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Source Control\MARS\Engine\Source\Core\Game.cpp">
+      <Filter>Engine\Source\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Source Control\MARS\Engine\Source\ECS\ECS.cpp">
+      <Filter>Engine\Source\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Source Control\MARS\Engine\Source\Input\InputHandler.cpp">
+      <Filter>Engine\Source\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Source Control\MARS\Engine\Source\Rendering\Core.cpp">
+      <Filter>Engine\Source\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Source Control\MARS\Engine\Source\Rendering\Material.cpp">
+      <Filter>Engine\Source\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Source Control\MARS\Engine\Source\Rendering\Shader.cpp">
+      <Filter>Engine\Source\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Source Control\MARS\Engine\Source\Rendering\Texture.cpp">
+      <Filter>Engine\Source\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Source Control\MARS\Engine\Source\Sound\SoundEngine.cpp">
+      <Filter>Engine\Source\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Source Control\MARS\Engine\Source\Sound\SoundInstance.cpp">
+      <Filter>Engine\Source\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="E:\Source Control\MARS\Engine\glad.c">
+      <Filter>Engine</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="E:\Source Control\MARS\Engine\Classes\Core\EngineCore.h">
+      <Filter>Engine\Classes\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Source Control\MARS\Engine\Classes\Core\Game.h">
+      <Filter>Engine\Classes\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Source Control\MARS\Engine\Classes\ECS\ECS.h">
+      <Filter>Engine\Classes\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Source Control\MARS\Engine\Classes\Input\InputHandler.h">
+      <Filter>Engine\Classes\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Source Control\MARS\Engine\Classes\Input\Keys.h">
+      <Filter>Engine\Classes\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Source Control\MARS\Engine\Classes\Rendering\Core.h">
+      <Filter>Engine\Classes\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Source Control\MARS\Engine\Classes\Rendering\Material.h">
+      <Filter>Engine\Classes\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Source Control\MARS\Engine\Classes\Rendering\Shader.h">
+      <Filter>Engine\Classes\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Source Control\MARS\Engine\Classes\Rendering\Texture.h">
+      <Filter>Engine\Classes\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Source Control\MARS\Engine\Classes\Sound\SoundEngine.h">
+      <Filter>Engine\Classes\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Source Control\MARS\Engine\Classes\Sound\SoundInstance.h">
+      <Filter>Engine\Classes\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Source Control\MARS\Engine\Classes\Types\Array.hpp">
+      <Filter>Engine\Classes\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="E:\Source Control\MARS\Engine\Classes\Types\String.hpp">
+      <Filter>Engine\Classes\Types</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="E:\Source Control\MARS\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{1081CB32-F423-36B6-9C15-51477692ECB0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Classes">
+      <UniqueIdentifier>{F283EEE2-2F55-303A-83C2-3C78C5902040}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Classes\Core">
+      <UniqueIdentifier>{330231C3-6DE4-326D-9F3C-BFF06B9C57E1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Classes\ECS">
+      <UniqueIdentifier>{D13FEDFE-2955-3D1D-860D-466780D145D9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Classes\Input">
+      <UniqueIdentifier>{8EED073F-E520-37D9-B0FE-A27988F4F387}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Classes\Rendering">
+      <UniqueIdentifier>{2F8E7B6C-FAEC-374C-849C-E77F79EEC54B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Classes\Sound">
+      <UniqueIdentifier>{79F24854-580E-3BBB-939A-4A4D93E51870}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Classes\Types">
+      <UniqueIdentifier>{050CB0BE-6116-3D83-A41C-C47673B4738E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source">
+      <UniqueIdentifier>{C8C134EC-D920-3473-AFDB-D4FE6E35C3D3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source\Core">
+      <UniqueIdentifier>{86E6C49C-4938-301D-BD96-CDB0DDB32BBB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source\ECS">
+      <UniqueIdentifier>{C9017257-B6FF-326E-85AC-FD597198A31B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source\Input">
+      <UniqueIdentifier>{1771349F-E5CC-3B95-99FC-3A75D92B744D}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source\Rendering">
+      <UniqueIdentifier>{E5C6B661-42C7-3643-A722-589885A83D84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source\Sound">
+      <UniqueIdentifier>{B4251B43-FDF3-38A9-AE2E-319670F512BF}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -12,4 +12,5 @@ cd /d %~dp0
 copy Thirdparty\Libs\_bin\ Build\Debug
 copy Thirdparty\Libs\_bin\ Build\Release
 
-pause
+MARS.sln.bat
+EXIT
