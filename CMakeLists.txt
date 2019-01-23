@@ -32,8 +32,10 @@ file(GLOB_RECURSE HDRS
 file(GLOB_RECURSE SRCS
 	${MARS_SOURCE_DIR}/Engine/Source/*.cpp
 	${MARS_SOURCE_DIR}/Engine/Source/*.c
+	${MARS_SOURCE_DIR}/Engine/Source/*.cc
 	${MARS_SOURCE_DIR}/Engine/*.cpp
 	${MARS_SOURCE_DIR}/Engine/*.c
+	${MARS_SOURCE_DIR}/Engine/*.cc
 )
 
 find_package(OpenGL REQUIRED)
