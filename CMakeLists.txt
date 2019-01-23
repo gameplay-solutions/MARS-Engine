@@ -36,8 +36,6 @@ file(GLOB_RECURSE SRCS
 	${MARS_SOURCE_DIR}/Engine/*.c
 )
 
-add_executable(MARS ${HDRS} ${SRCS})
-
 find_package(OpenGL REQUIRED)
 
 include_directories(
@@ -48,8 +46,19 @@ include_directories(
 	${OPENGL_INCLUDE_DIRS}
 )
 
+link_directories(
+	${MARS_SOURCE_DIR}/Thirdparty/Libs
+)
+
+add_executable(MARS ${HDRS} ${SRCS})
+
 target_link_libraries( MARS
 	${OPENGL_LIBRARIES}
+	glfw3.lib
+	assimp.lib
+	SDL2.lib
+	SDL2main.lib
+	SDL2test.lib
 )
 
 if(WIN32)
