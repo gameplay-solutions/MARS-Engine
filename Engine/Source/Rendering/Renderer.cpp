@@ -2,6 +2,8 @@
 
 namespace MARS
 {
+#pragma warning(push)
+#pragma warning(disable:4100)
 	void Renderer::Init(GLADloadproc LoadProc)
 	{
 	
@@ -11,6 +13,7 @@ namespace MARS
 	{
 
 	}
+#pragma warning(pop)
 
 	FORCEINLINE glm::vec2 Renderer::GetRenderSize()
 	{

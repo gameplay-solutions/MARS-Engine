@@ -6,10 +6,13 @@ namespace MARS
 {
 	/** Start Callbacks */
 
+	#pragma warning(push)
+	#pragma warning(disable:4100)
 	void FramebufferSize_Callback(GLFWwindow* InWindow, int32 InWidth, int32 InHeight)
 	{
 
 	}
+	#pragma warning(pop)
 	
 	void Update(GLFWwindow* InWindow)
 	{
