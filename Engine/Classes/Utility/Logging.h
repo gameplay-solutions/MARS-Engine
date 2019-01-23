@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core/EngineCore.h"
+#include "fmt/format.h"
 
 enum LogType
 {
@@ -14,18 +15,27 @@ enum LogType
 class Log
 {
 	/** 
-	 * @NOTE(Chrisr): Using vectors instead of maps here because it will force everything to be linear in memory
-	 * I.E, looping over a log is more cache efficient this way than with a map
+	 * @note(devlinw): chris says "Using vectors instead of maps here because it will force everything to be linear in memory
+	 * I.E, looping over a log is more cache efficient this way than with a map"
 	 **/
 
 	static std::vector<std::vector<std::string>> LogEntries;
 
 public:
 
-	/** 
-	 *	Writes a single log with a specified LogType. All logs are placed in a queue 
+	/**
+	 *	Writes a single log with a specified LogType. All logs are placed in a queue
 	 **/
 	static void Write(const LogType Type, const std::string& LogText);
+	
+	/**
+	 *	Writes a single log with a specified LogType, and allows variadic arguments. All logs are placed in a queue
+	 **/
+	template<class ... T>
+	static void Write(const LogType Type, const std::string& LogText, T...Args)
+	{
+		Write(Type, fmt::format(LogText, Args...));
+	}
 
 	/** 
 	 *	Reads all logs for a specific LogType. It will read all temp logs by default, this can be changed by the caller.
