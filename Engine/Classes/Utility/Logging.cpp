@@ -71,7 +71,15 @@ void Log::PrintLog(const LogType Type, const std::string& LogText, uint64 Timest
 
 	#pragma warning(push)
 	#pragma warning(disable:4127)
-	std::cout << fmt::format("({:%H:%M:%S}) [{}]: {}\n", system_clock::duration(Timestamp), LOG_TYPE_NAMES[Type], LogText);
+	tm TM;
+	auto Dur = system_clock::duration(Timestamp);
+	auto Point = system_clock::time_point(Dur);
+
+	auto AT = system_clock::to_time_t(Point);
+
+	localtime_s(&TM, &AT);
+	
+	std::cout << fmt::format("({:0>2}:{:%M:%S}) [{}]: {}\n", TM.tm_hour % 12, Dur, LOG_TYPE_NAMES[Type], LogText);
 	#pragma warning(pop)
 }
 

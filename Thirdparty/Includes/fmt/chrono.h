@@ -303,7 +303,7 @@ template <typename FormatContext, typename OutputIt> struct chrono_formatter {
     if (ns == numeric_system::standard) {
       write(second(), 2);
       if (ms != std::chrono::milliseconds(0)) {
-        *out++ = '.';
+        *out++ = ':';
         write(to_int(ms.count()), 3);
       }
       return;
