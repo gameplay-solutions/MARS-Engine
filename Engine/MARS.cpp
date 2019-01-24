@@ -1,9 +1,6 @@
 #include "Core/EngineCore.h"
-#include "Rendering/GraphicsContext.h"
 #include "Application/Application.h"
-
-//MARS::FMasterRenderContext* RenderContex;
-MARS::Application* App;
+#include "GLFW/glfw3.h"
 
 int main(int argc, char* argv[])
 {
@@ -12,15 +9,8 @@ int main(int argc, char* argv[])
 		/** @TODO(Chrisr): Handle command args */
 		argv[argc];
 	}
-
-// 	Log::Write(LogInit, "Initializing MasterRenderContex");
-// 
-// 	RenderContex->InitializeContexSytstem();
-// 	RenderContex->InitializeRenderSystem();
-// 
-// 	Log::Write(LogInit, "Initialized Render Contex. Rendering Engine is running.");
-
-	App->Run();
+	
+	MARS::Application::Get().StartEngine();
 
 	return 0;
 }

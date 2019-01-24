@@ -2,17 +2,17 @@
 
 namespace MARS
 {
-	void Renderer::Init(GLADloadproc LoadProc)
+	void FRenderer::Init(GLADloadproc LoadProc)
 	{
 	
 	}
 
-	void Renderer::SetRenderSize(uint32 NewWidth, uint32 NewHeight)
+	void FRenderer::SetRenderSize(uint32 NewWidth, uint32 NewHeight)
 	{
 
 	}
 
-	FORCEINLINE glm::vec2 Renderer::GetRenderSize()
+	FORCEINLINE glm::vec2 FRenderer::GetRenderSize()
 	{
 
 	}

@@ -8,3 +8,12 @@
 #else
 #define assertCheck (void)
 #endif
+
+#define Assert(x, y)\
+{\
+	if (!(x))\
+	{\
+		Log::Write(LogError, y);\
+		__debugbreak();\
+	}\
+};

@@ -25,6 +25,7 @@ endif ( CMAKE_BUILD_TYPE STREQUAL "Release" )
 file(GLOB_RECURSE HDRS
 	${MARS_SOURCE_DIR}/Engine/Classes/*.h
 	${MARS_SOURCE_DIR}/Engine/Classes/*.hpp
+	${MARS_SOURCE_DIR}/Engine/Platform/*.h
 	${MARS_SOURCE_DIR}/Engine/*.h
 	${MARS_SOURCE_DIR}/Engine/*.hpp
 )
@@ -32,6 +33,8 @@ file(GLOB_RECURSE HDRS
 file(GLOB_RECURSE SRCS
 	${MARS_SOURCE_DIR}/Engine/Source/*.cpp
 	${MARS_SOURCE_DIR}/Engine/Source/*.c
+	${MARS_SOURCE_DIR}/Engine/Platform/*.c
+	${MARS_SOURCE_DIR}/Engine/Platform/*.cpp
 	${MARS_SOURCE_DIR}/Engine/*.cpp
 	${MARS_SOURCE_DIR}/Engine/*.c
 )
@@ -41,6 +44,7 @@ find_package(OpenGL REQUIRED)
 include_directories(
 	${MARS_SOURCE_DIR}/Engine/Classes
 	${MARS_SOURCE_DIR}/Engine/Source
+	${MARS_SOURCE_DIR}/Engine/Platform/Windows
 	${MARS_SOURCE_DIR}/Engine/
 	${MARS_SOURCE_DIR}/Thirdparty/Includes
 	${OPENGL_INCLUDE_DIRS}
