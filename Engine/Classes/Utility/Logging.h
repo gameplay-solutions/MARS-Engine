@@ -3,13 +3,53 @@
 #include "Core/EngineCore.h"
 #include "fmt/format.h"
 
+// #define Entry_LogType(Name, Idx)
+
+#define Entries_LogType			\
+Entry_LogType(LogTemp, 0)		\
+Entry_LogType(LogWarning, 1)	\
+Entry_LogType(LogError, 2)		\
+Entry_LogType(LogInit, 3)		\
+Entry_LogType(LogGraphics, 4)
+
+#define Entry_LogType(Name, Idx) Fl##Name = (1 << Idx),
+enum LogTypeFlags
+{
+	Entries_LogType
+
+#undef Entry_LogType
+#define Entry_LogType(Name, Idx) Fl##Name |
+
+	FlLogALL = Entries_LogType /*|*/ 0,
+};
+#undef Entry_LogType
+#define Entry_LogType(Name, Idx) Name = Idx,
 enum LogType
 {
-	LogTemp = 0,
-	LogWarning = 2,
-	LogError = 4,
-	LogInit = 8,
-	LogGraphics = 16,
+	Entries_LogType
+	LogMAX
+};
+#undef Entry_LogType
+
+constexpr LogType FromLogFlag(LogTypeFlags Flags) 
+{ 
+	switch (Flags)
+	{
+#define Entry_LogType(Name, Idx) case Fl##Name: return Name;
+		default: /** @todo(devlinw): Error */
+		case FlLogALL: return LogMAX;
+#undef Entry_LogType
+	}
+}
+
+constexpr LogTypeFlags ToLogFlag(LogType Type) { return LogTypeFlags(1 << Type); }
+
+struct LogEntry
+{
+	uint64 Timestamp;
+	std::string Message;
+
+	LogEntry(const std::string& _Message);
 };
 
 class Log
@@ -19,7 +59,7 @@ class Log
 	 * I.E, looping over a log is more cache efficient this way than with a map"
 	 **/
 
-	static std::vector<std::vector<std::string>> LogEntries;
+	static std::vector<std::vector<LogEntry>> LogEntries;
 
 public:
 
@@ -40,14 +80,14 @@ public:
 	/** 
 	 *	Reads all logs for a specific LogType. It will read all temp logs by default, this can be changed by the caller.
 	 **/
-	static void Read(const LogType Type = LogTemp);
+	static void Read(const LogTypeFlags Type = FlLogALL);
 
 	static void Clear();
 
-	/** @NOTE(Chrisr): Possible Log IO? */
+	/** @note(devlinw): chris thinks logging to a file might be cool */
 
 private:
 
-	static void PrintLog(const LogType Type, const std::string& LogText);
+	static void PrintLog(const LogType Type, const std::string& LogText, uint64 Timestamp);
 
 };
