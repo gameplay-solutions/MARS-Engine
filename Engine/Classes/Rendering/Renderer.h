@@ -9,7 +9,7 @@ namespace MARS
 	 *	This class maintains a render buffer queue, sorts the buffer, 
 	 *	and manages multiple render passes and render buffers 
 	 **/
-	class Renderer
+	class FRenderer
 	{
 	public:
 
