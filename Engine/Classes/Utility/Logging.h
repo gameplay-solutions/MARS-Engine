@@ -44,12 +44,21 @@ constexpr LogType FromLogFlag(LogTypeFlags Flags)
 
 constexpr LogTypeFlags ToLogFlag(LogType Type) { return LogTypeFlags(1 << Type); }
 
+__forceinline LogTypeFlags operator|(const LogTypeFlags& LHS, const LogTypeFlags& RHS)
+{
+	return LogTypeFlags(uint64(LHS) | uint64(RHS));
+}
+
 struct LogEntry
 {
-	uint64 Timestamp;
+	uint64	Timestamp;
+	int8	Cat;
 	std::string Message;
 
-	LogEntry(const std::string& _Message);
+	LogEntry(const std::string& _Message, const LogType _Type);
+
+	// only public for std::vector - do not use
+	LogEntry() {}
 };
 
 class Log
@@ -59,7 +68,11 @@ class Log
 	 * I.E, looping over a log is more cache efficient this way than with a map"
 	 **/
 
-	static std::vector<std::vector<LogEntry>> LogEntries;
+	/** @todo(devlinw): best gains here likely from custom alloc - bucket for each cat, fixed size for outer container? */
+	static std::vector<std::vector<LogEntry>>	LogEntries;
+
+	/** @note(devlinw): conscious decision to double mem footprint to optimize case of dumping a full, sorted log.  */
+	static std::vector<LogEntry>				AllLogEntries; 
 
 public:
 
@@ -79,8 +92,10 @@ public:
 
 	/** 
 	 *	Reads all logs for a specific LogType. It will read all temp logs by default, this can be changed by the caller.
+	 *	
+	 *	@param CombineAll Whether all the logs should be collated into the same sorted list.
 	 **/
-	static void Read(const LogTypeFlags Type = FlLogALL);
+	static void Read(const LogTypeFlags Type = FlLogALL, bool CombineAll = true);
 
 	static void Clear();
 
