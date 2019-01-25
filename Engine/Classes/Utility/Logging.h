@@ -49,16 +49,124 @@ __forceinline LogTypeFlags operator|(const LogTypeFlags& LHS, const LogTypeFlags
 	return LogTypeFlags(uint64(LHS) | uint64(RHS));
 }
 
+/// Color is from fmt::color
+/// TECHNICALLY, we can support either/or fmt::color and fmt::terminal_color. However, MS's cmd.exe appears to work just fine with the full color, so meh.
+/// We could ALSO have this be a full on hex code but at THIS time I'm not supporting it.
+// #define Entry_LogImportance(Name, Idx, Color)
+
+#define Entries_LogImportance \
+Entry_LogImportance(LI_Ancillary, 0, gray) \
+Entry_LogImportance(LI_Info, 1, white) \
+Entry_LogImportance(LI_Warning, 2, pale_golden_rod) \
+Entry_LogImportance(LI_Error, 3, tomato) \
+Entry_LogImportance(LI_Fatal, 4, red)
+
+#define Entry_LogImportance(Name, Idx, Color) Name = Idx,
+enum LogImportance
+{
+	Entries_LogImportance
+	LI_Max,
+};
+#undef Entry_LogImportance
+
 struct LogEntry
 {
-	uint64	Timestamp;
-	int8	Cat;
-	std::string Message;
+	uint64			Timestamp;
+	int8			Cat;
+	LogImportance	Importance;
+	std::string		Message;
 
-	LogEntry(const std::string& _Message, const LogType _Type);
+	LogEntry(const std::string& _Message, const LogType _Type, const LogImportance _Importance = LI_Info);
 
 	// only public for std::vector - do not use
 	LogEntry() {}
+};
+
+class CategoricLog
+{
+	LogType Type;
+
+public:
+
+	/**
+	 *	Writes a single unformatted message to the log as Importance.
+	 **/
+	void Write(const std::string& LogText, const LogImportance Importance = LI_Info);
+	
+	/**
+	 *	Writes a single formatted message to the log as Info, and allows variadic arguments.
+	 **/
+	template<class ... T>
+	void Write(const std::string& LogText, T...Args)
+	{
+		Write(fmt::format(LogText, Args...), LI_Info);
+	}
+
+	/**
+	 *	Writes a single formatted message to the log as specified Importance, and allows variadic arguments.
+	 **/
+	template<class ... T>
+	void Importance(const LogImportance Importance, const std::string& LogText, T...Args)
+	{
+		Write(fmt::format(LogText, Args...), Importance);
+	}
+	
+	/**
+	 *	Writes a single formatted message to the log as Ancillary, and allows variadic arguments.
+	 **/
+	template<class ... T>
+	void Ancillary(const std::string& LogText, T...Args)
+	{
+		Write(fmt::format(LogText, Args...), LI_Ancillary);
+	}
+
+	/**
+	 *	Writes a single formatted message to the log as Info, and allows variadic arguments.
+	 **/
+	template<class ... T>
+	void Info(const std::string& LogText, T...Args)
+	{
+		Write(fmt::format(LogText, Args...), LI_Info);
+	}
+
+	/**
+	 *	Writes a single formatted message to the log as Warning, and allows variadic arguments.
+	 **/
+	template<class ... T>
+	void Warning(const std::string& LogText, T...Args)
+	{
+		Write(fmt::format(LogText, Args...), LI_Warning);
+	}
+
+	/**
+	 *	Writes a single formatted message to the log as Error, and allows variadic arguments.
+	 **/
+	template<class ... T>
+	void Error(const std::string& LogText, T...Args)
+	{
+		Write(fmt::format(LogText, Args...), LI_Error);
+	}
+
+	/**
+	 *	Writes a single formatted message to the log as Fatal, and allows variadic arguments.
+	 **/
+	template<class ... T>
+	void Fatal(const std::string& LogText, T...Args)
+	{
+		Write(fmt::format(LogText, Args...), LI_Fatal);
+	}
+
+	/** 
+	 *	Reads the log for the specified category.
+	 **/
+	void Read();
+
+private:
+
+	/** @todo(devlinw): delete copy ctor & assign #CategoricTidy */
+
+	CategoricLog(LogType _Type) : Type(_Type) {}
+	friend class Log;
 };
 
 class Log
@@ -76,18 +184,21 @@ class Log
 
 public:
 
+	/** @todo(devlinw): return reference to locally kept objects #CategoricTidy */
+	static CategoricLog Get(const LogType Type);
+
 	/**
 	 *	Writes a single log with a specified LogType. All logs are placed in a queue
 	 **/
-	static void Write(const LogType Type, const std::string& LogText);
+	static void Write(const LogImportance Importance, const LogType Type, const std::string& LogText);
 	
 	/**
 	 *	Writes a single log with a specified LogType, and allows variadic arguments. All logs are placed in a queue
 	 **/
 	template<class ... T>
-	static void Write(const LogType Type, const std::string& LogText, T...Args)
-	{
-		Write(Type, fmt::format(LogText, Args...));
+	static void Write(const LogImportance Importance, const LogType Type, const std::string& LogText, T...Args)
+{
+		Write(Importance, Type, fmt::format(LogText, Args...));
 	}
 
 	/** 
@@ -103,6 +214,6 @@ public:
 
 private:
 
-	static void PrintLog(const LogType Type, const std::string& LogText, uint64 Timestamp);
-
+	static void PrintLog(const LogEntry& Log);
+	static void PrintLog(const LogType Type, const std::string& LogText, uint64 Timestamp, const LogImportance Importance = LI_Info);
 };
