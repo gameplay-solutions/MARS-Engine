@@ -13,7 +13,7 @@
 {\
 	if (!(x))\
 	{\
-		Log::Write(LogError, y);\
+		Log::Write(LI_Fatal, LogError, y);\
 		__debugbreak();\
 	}\
 };
