@@ -6,3 +6,11 @@
 // @TEMPHACK: The string class won't use std::string
 #include <string>
 using String = std::string;
+
+class MString
+{
+
+public:
+
+	
+};

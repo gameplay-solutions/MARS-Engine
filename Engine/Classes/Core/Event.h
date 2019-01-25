@@ -5,6 +5,7 @@
 
 namespace MARS
 {
+	/** @todo(Chrisr): Maybe have this be stored in an .ini and setup by MHT? */
 	enum class EventType
 	{
 		None = 0,
@@ -16,9 +17,6 @@ namespace MARS
 		KeyPressed,
 		KeyReleased,
 		KeyTyped,
-		ApplicationTick,
-		ApplicationUpdate,
-		ApplicationRender,
 		MouseButtonPressed,
 		MouseButtonReleased,
 		MouseMoved,
@@ -35,24 +33,7 @@ namespace MARS
 	class FEvent
 	{
 	public:
-
-		virtual EventType GetEventType() const = 0;
-		virtual const char* GetName() const {}
-		virtual int32 GetCategoryFlag() const {}
-		
-		FORCEINLINE bool IsInCategory(EventCategory Cat)
-		{
-			return GetCategoryFlag() & Cat;
-		}
-
 	private:
 
-		bool bEventHandled = false;
-	};
-	
-	class FEventDispatcher
-	{
-		template<typename T>
-		using EventFunction = std::function<bool(T&)>;
 	};
 }

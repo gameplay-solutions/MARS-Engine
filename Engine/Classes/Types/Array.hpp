@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Types/CoreTypes.h"
+#include "Core/EngineCore.h"
 
 /** @TODO(Chrisr): Implement custom Array function */
 // @TEMPHACK: The Array class won't use std::vector

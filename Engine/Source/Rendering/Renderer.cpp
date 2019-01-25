@@ -3,9 +3,4 @@
 namespace MARS
 {
 
-	FORCEINLINE glm::vec2 FRenderer::GetRenderSize()
-	{
-
-	}
-
 }

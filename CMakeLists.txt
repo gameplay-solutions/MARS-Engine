@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.4)
+cmake_minimum_required(VERSION 3.6.3)
 
 project(MARS)
 
@@ -13,35 +13,39 @@ if ( CMAKE_BUILD_TYPE STREQUAL "" )
 		CMAKE_BUILD_TYPE
 			"Debug"
 		CACHE STRING
-			"Choose the type of build, options are: None (CMAKE_CXX_FLAGS or CMAKE_C_FLAGS used) \"Debug\" \"Release\" \"RelWithDebInfo\" \"MinSizeRel\"."
+			"Choose the type of build, options are: None (CMAKE_CXX_FLAGS or CMAKE_C_FLAGS used) \"DebugEditor\" \"Debug\" \"VerboseDebug\" \"Shipping\"."
 		FORCE
 	)
 endif ( CMAKE_BUILD_TYPE STREQUAL "" )
 
-if ( CMAKE_BUILD_TYPE STREQUAL "Release" )
+if ( CMAKE_BUILD_TYPE STREQUAL "Debug" )
 add_definitions( -O2 )
-endif ( CMAKE_BUILD_TYPE STREQUAL "Release" )
+endif ( CMAKE_BUILD_TYPE STREQUAL "Debug" )
 
+if ( CMAKE_BUILD_TYPE STREQUAL "VerboseDebug" )
+add_definitions( -O4 )
+endif ( CMAKE_BUILD_TYPE STREQUAL "VerboseDebug" )
+
+# Begin MARS
 file(GLOB_RECURSE HDRS
+	${MARS_SOURCE_DIR}/Engine/Platform/*.h
+	${MARS_SOURCE_DIR}/Engine/Platform/*.hpp
 	${MARS_SOURCE_DIR}/Engine/Classes/*.h
 	${MARS_SOURCE_DIR}/Engine/Classes/*.hpp
-	${MARS_SOURCE_DIR}/Engine/Platform/*.h
 	${MARS_SOURCE_DIR}/Engine/*.h
 	${MARS_SOURCE_DIR}/Engine/*.hpp
 )
 
 file(GLOB_RECURSE SRCS
-	${MARS_SOURCE_DIR}/Engine/Source/*.cpp
-	${MARS_SOURCE_DIR}/Engine/Source/*.c
-<<<<<<< HEAD
-	${MARS_SOURCE_DIR}/Engine/Platform/*.c
 	${MARS_SOURCE_DIR}/Engine/Platform/*.cpp
-=======
+	${MARS_SOURCE_DIR}/Engine/Platform/*.cc
+	${MARS_SOURCE_DIR}/Engine/Platform/*.c
+	${MARS_SOURCE_DIR}/Engine/Source/*.cpp
 	${MARS_SOURCE_DIR}/Engine/Source/*.cc
->>>>>>> 937241bc59ca51c55a7a4b49751867cccba3322a
+	${MARS_SOURCE_DIR}/Engine/Source/*.c
 	${MARS_SOURCE_DIR}/Engine/*.cpp
-	${MARS_SOURCE_DIR}/Engine/*.c
 	${MARS_SOURCE_DIR}/Engine/*.cc
+	${MARS_SOURCE_DIR}/Engine/*.c
 )
 
 find_package(OpenGL REQUIRED)
@@ -49,8 +53,8 @@ find_package(OpenGL REQUIRED)
 include_directories(
 	${MARS_SOURCE_DIR}/Engine/Classes
 	${MARS_SOURCE_DIR}/Engine/Source
-	${MARS_SOURCE_DIR}/Engine/Platform/Windows
-	${MARS_SOURCE_DIR}/Engine/
+	${MARS_SOURCE_DIR}/Engine/Platform
+	${MARS_SOURCE_DIR}/Engine
 	${MARS_SOURCE_DIR}/Thirdparty/Includes
 	${OPENGL_INCLUDE_DIRS}
 )
@@ -59,7 +63,8 @@ link_directories(
 	${MARS_SOURCE_DIR}/Thirdparty/Libs
 )
 
-add_executable(MARS ${HDRS} ${SRCS})
+add_library(MARS SHARED ${HDRS} ${SRCS})
+# End MARS
 
 target_link_libraries( MARS
 	${OPENGL_LIBRARIES}
@@ -69,6 +74,33 @@ target_link_libraries( MARS
 	SDL2main.lib
 	SDL2test.lib
 )
+
+# Begin MARSEditor
+file(GLOB_RECURSE EDITOR_HDRS
+	${MARS_SOURCE_DIR}/Editor/Classes/*.h
+	${MARS_SOURCE_DIR}/Editor/Classes/*.hpp
+	${MARS_SOURCE_DIR}/Editor/Platform/*.h
+	${MARS_SOURCE_DIR}/Editor/*.h
+	${MARS_SOURCE_DIR}/Editor/*.hpp
+)
+
+file(GLOB_RECURSE EDITOR_SRCS
+	${MARS_SOURCE_DIR}/Editor/Source/*.cpp
+	${MARS_SOURCE_DIR}/Editor/Source/*.c
+	${MARS_SOURCE_DIR}/Editor/Platform/*.c
+	${MARS_SOURCE_DIR}/Editor/Platform/*.cpp
+	${MARS_SOURCE_DIR}/Editor/Source/*.cc
+	${MARS_SOURCE_DIR}/Editor/*.cpp
+	${MARS_SOURCE_DIR}/Editor/*.c
+	${MARS_SOURCE_DIR}/Editor/*.cc
+)
+
+add_executable(MARSEditor ${EDITOR_HDRS} ${EDITOR_SRCS})
+
+target_link_libraries(MARSEditor MARS)
+
+set_property(DIRECTORY ${MARS_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT MARSEditor)
+# End MARSEditor
 
 if(WIN32)
 	string(REPLACE "/" "\\" source_path_windows "${MARS_SOURCE_DIR}/Resources")
