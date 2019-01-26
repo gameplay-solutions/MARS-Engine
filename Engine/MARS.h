@@ -19,4 +19,6 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
-#endif // PLATFORM_WINDOWS
+#else
+#error Unsupported platform, MARS unable to compile!
+#endif // PLATFORMS
