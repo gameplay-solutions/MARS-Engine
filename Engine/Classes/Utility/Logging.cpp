@@ -2,6 +2,7 @@
 #include <chrono>
 #include "fmt/chrono.h"
 #include "fmt/color.h"
+#include <map>
 
 #define Entry_LogType(Name, Idx) #Name ,
 static std::string LOG_TYPE_NAMES[LogMAX] =
@@ -27,9 +28,16 @@ static fmt::color LOG_IMPORTANCE_COLORS[LI_Max] = /* */
 std::vector<std::vector<LogEntry>> Log::LogEntries = std::vector<std::vector<LogEntry>>(LogMAX);
 std::vector<LogEntry> Log::AllLogEntries = std::vector<LogEntry>();
 
-CategoricLog Log::Get(const LogType Type)
+CategoricLog& Log::Get(const LogType Type)
 {
-	return CategoricLog(Type);
+	static std::map<LogType, CategoricLog> CategoricLogs;
+
+	if (CategoricLogs.find(Type) == CategoricLogs.end())
+	{
+		CategoricLogs.emplace(Type, CategoricLog(Type));
+	}
+
+	return CategoricLogs[Type];
 }
 
 void Log::Write(const LogImportance Importance, const LogType Type, const std::string& LogText)
@@ -150,6 +158,7 @@ LogEntry::LogEntry(const std::string& _Message, const LogType _Type, const LogIm
 , Cat(decltype(Cat)(_Type))
 , Importance(_Importance)
 {}
+
 
 void CategoricLog::Write(const std::string& LogText, const LogImportance Importance /*= LI_Info*/)
 {

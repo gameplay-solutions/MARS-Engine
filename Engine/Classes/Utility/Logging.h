@@ -161,11 +161,21 @@ public:
 	 **/
 	void Read();
 
+	// do not use, public for map only.
+	CategoricLog() : Type(LogMAX) {}
+	// do not use, public for map only.
+	CategoricLog(CategoricLog&&) = default;
+	// do not use, public for map only.
+	CategoricLog& operator=(CategoricLog&&) = default;
+
+	/** @note(devlinw): Can only take a ref to this type. */
+	CategoricLog(const CategoricLog&) = delete;
+	CategoricLog& operator=(const CategoricLog&) = delete;
+
 private:
 
-	/** @todo(devlinw): delete copy ctor & assign #CategoricTidy */
-
 	CategoricLog(LogType _Type) : Type(_Type) {}
+
 	friend class Log;
 };
 
@@ -180,12 +190,12 @@ class Log
 	static std::vector<std::vector<LogEntry>>	LogEntries;
 
 	/** @note(devlinw): conscious decision to double mem footprint to optimize case of dumping a full, sorted log.  */
-	static std::vector<LogEntry>				AllLogEntries; 
+	static std::vector<LogEntry>				AllLogEntries;
 
 public:
 
 	/** @todo(devlinw): return reference to locally kept objects #CategoricTidy */
-	static CategoricLog Get(const LogType Type);
+	static CategoricLog& Get(const LogType Type);
 
 	/**
 	 *	Writes a single log with a specified LogType. All logs are placed in a queue
