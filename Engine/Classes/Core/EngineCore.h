@@ -2,17 +2,21 @@
 
 #include <iostream>
 #include <iomanip>
+#include <functional>
 
 #include "Types/String.hpp"
 #include "Types/Array.hpp"
 #include "Types/CoreTypes.h"
 #include "Core/Asserts.h"
 #include "Utility/Logging.h"
+#include "Input/Keys.hpp"
 
 #pragma warning(push)
 #pragma warning(disable:4201)
 #include "glm/glm.hpp"
 #pragma warning(pop)
+
+#define FORCEINLINE __forceinline
 
 
 #if defined(WIN32) || defined(__WIN32) || defined(__WIN32__) || defined(WIN64) || defined(__WIN64)

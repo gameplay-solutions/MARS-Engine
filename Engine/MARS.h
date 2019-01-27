@@ -2,7 +2,7 @@
 
 #if PLATFORM_WINDOWS
 
-extern MARS::Application* MARS::CreateApplication();
+MARS::Application* MARS::CreateApplication();
 
 int main(int argc, char* argv[])
 {

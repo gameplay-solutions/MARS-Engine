@@ -1,4 +1,6 @@
 #include "Application/Application.h"
+#include "Application/ApplicationEvent.hpp"
+#include "Input/KeyboardEvent.hpp"
 
 namespace MARS
 {

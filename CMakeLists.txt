@@ -64,7 +64,6 @@ link_directories(
 )
 
 add_library(MARS SHARED ${HDRS} ${SRCS})
-# End MARS
 
 target_link_libraries( MARS
 	${OPENGL_LIBRARIES}
@@ -74,6 +73,7 @@ target_link_libraries( MARS
 	SDL2main.lib
 	SDL2test.lib
 )
+# End MARS
 
 # Begin MARSEditor
 file(GLOB_RECURSE EDITOR_HDRS
