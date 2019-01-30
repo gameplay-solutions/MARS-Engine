@@ -2,6 +2,8 @@
 #include "Application/ApplicationEvent.hpp"
 #include "Input/KeyboardEvent.hpp"
 
+#include "Utility/Logging.h"
+
 namespace MARS
 {
 	Application::Application()
