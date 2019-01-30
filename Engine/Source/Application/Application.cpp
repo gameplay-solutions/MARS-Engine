@@ -4,7 +4,6 @@
 
 namespace MARS
 {
-
 	Application::Application()
 	{
 
