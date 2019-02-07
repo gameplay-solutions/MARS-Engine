@@ -1,15 +1,20 @@
 #pragma once
 
+#include "Core/EngineCore.h"
+
 namespace MARS
 {
-	struct GLFWwindow;
-
-	/** 
-	 *	Handle Microsoft Windows platform specific operations here
-	 **/
-	class FWindows_PlatformHandler
+	inline namespace PLATFORMWINDOWS
 	{
-	public:
+#ifndef PLATFORM_WINSTORE
+		using WindowType = HWND;
+#else
+		typedef Windows::UI::Core::CoreWindow^ WindowType;
+#endif
 
-	};
+	
+	void RegisterWindow(WindowType InWindow);
+	WindowType GetRegisteredWindow();
+	bool ActiveWindow();
+	}
 }

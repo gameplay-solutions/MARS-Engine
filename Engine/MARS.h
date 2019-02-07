@@ -4,7 +4,7 @@
 
 MARS::Application* MARS::CreateApplication();
 
-int main(int argc, char* argv[])
+int32 main(int32 argc, char* argv[])
 {
 	if (argc > 1)
 	{

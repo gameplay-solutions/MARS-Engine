@@ -5,7 +5,7 @@
 
 namespace MARS
 {
-	class EXPORT_TYPE FRenderer
+	class EXPORT_TYPE Renderer
 	{
 	public:
 	

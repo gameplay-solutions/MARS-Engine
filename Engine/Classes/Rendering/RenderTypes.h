@@ -419,7 +419,7 @@ namespace MARS
 /*|| Begin Struct Types                                                       
 /*||===================================================================*/
 
-		struct ViewPort
+		struct Viewport
 		{
 			float TopLeftX;
 			float TopLeftY;
@@ -428,7 +428,7 @@ namespace MARS
 			float MinDepth;
 			float MaxDepth;
 
-			ViewPort() :
+			Viewport() :
 				TopLeftX(0.0f),
 				TopLeftY(0.0f),
 				Width(0.0f),

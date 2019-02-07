@@ -5,6 +5,8 @@ class MARSEditor : public MARS::Application
 public:
 	MARSEditor(){}
 	~MARSEditor(){}
+
+	
 };
 
 MARS::Application* MARS::CreateApplication()

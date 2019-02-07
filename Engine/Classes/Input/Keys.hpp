@@ -361,6 +361,6 @@ public:
 		KEY_APP2 = 284
 	};
 
-	static const int NUM_KEYS = 512;
-	static const int NUM_MOUSEBUTTONS = 256;
+	static const int32 NUM_KEYS = 512;
+	static const int32 NUM_MOUSEBUTTONS = 256;
 };
