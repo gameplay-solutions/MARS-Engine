@@ -48,34 +48,6 @@ file(GLOB_RECURSE SRCS
 	${MARS_SOURCE_DIR}/Engine/*.c
 )
 
-find_package(OpenGL REQUIRED)
-
-include_directories(
-	${MARS_SOURCE_DIR}/Engine/Classes
-	${MARS_SOURCE_DIR}/Engine/Source
-	${MARS_SOURCE_DIR}/Engine/Platform
-	${MARS_SOURCE_DIR}/Engine
-	${MARS_SOURCE_DIR}/Thirdparty/Includes
-	${OPENGL_INCLUDE_DIRS}
-)
-
-link_directories(
-	${MARS_SOURCE_DIR}/Thirdparty/Libs
-)
-
-add_library(MARS SHARED ${HDRS} ${SRCS})
-# End MARS
-
-target_link_libraries( MARS
-	${OPENGL_LIBRARIES}
-	glfw3.lib
-	assimp.lib
-	SDL2.lib
-	SDL2main.lib
-	SDL2test.lib
-)
-
-# Begin MARSEditor
 file(GLOB_RECURSE EDITOR_HDRS
 	${MARS_SOURCE_DIR}/Editor/Classes/*.h
 	${MARS_SOURCE_DIR}/Editor/Classes/*.hpp
@@ -95,9 +67,53 @@ file(GLOB_RECURSE EDITOR_SRCS
 	${MARS_SOURCE_DIR}/Editor/*.cc
 )
 
-add_executable(MARSEditor ${EDITOR_HDRS} ${EDITOR_SRCS})
+find_package(OpenGL REQUIRED)
 
+include_directories(
+	${MARS_SOURCE_DIR}/Engine/Classes
+	${MARS_SOURCE_DIR}/Engine/Source
+	${MARS_SOURCE_DIR}/Engine/Platform
+	${MARS_SOURCE_DIR}/Engine/
+	${MARS_SOURCE_DIR}/Thirdparty/Includes/
+	${OPENGL_INCLUDE_DIRS}
+)
+
+link_directories(
+	${MARS_SOURCE_DIR}/Thirdparty/Libs
+)
+
+add_library(MARS SHARED ${HDRS} ${SRCS})
+# End MARS
+
+target_link_libraries( MARS
+	${OPENGL_LIBRARIES}
+	glfw3.lib
+	assimp.lib
+	SDL2.lib
+	SDL2main.lib
+	SDL2test.lib
+	ImGui.lib
+)
+
+# Begin MARSEditor
+
+
+add_executable(MARSEditor ${EDITOR_HDRS} ${EDITOR_SRCS})
 target_link_libraries(MARSEditor MARS)
+
+add_library(ImGui STATIC 
+	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imgui.cpp
+	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imgui.h
+	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imgui_demo.cpp
+	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imgui_draw.cpp
+	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imgui_internal.h
+	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imgui_widgets.cpp
+	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imstb_rectpack.h
+	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imstb_textedit.h
+	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imstb_truetype.h
+	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imconfig.h
+)
+target_link_libraries(MARS ImGui)
 
 set_property(DIRECTORY ${MARS_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT MARSEditor)
 # End MARSEditor

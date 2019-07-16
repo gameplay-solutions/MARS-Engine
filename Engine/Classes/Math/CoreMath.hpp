@@ -35,9 +35,3 @@
 #ifndef M_G
 #define M_G 0.0000000000667384
 #endif
-
-struct MarsMath
-{
-	template<typename T>
-	FORCEINLINE
-};

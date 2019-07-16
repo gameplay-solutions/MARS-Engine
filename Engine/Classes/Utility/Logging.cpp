@@ -110,12 +110,12 @@ void Log::Clear()
 
 using namespace std::chrono;
 
-static void TerminalColorEscape(fmt::terminal_color DesiredColor, std::string& ColorEscapeCode)
-{
-	using namespace fmt::internal;
-	auto EscCodeMaker = make_foreground_color<char>(color_type(DesiredColor));
-	ColorEscapeCode.append(EscCodeMaker.begin());
-}
+// static void TerminalColorEscape(fmt::terminal_color DesiredColor, std::string& ColorEscapeCode)
+// {
+// 	using namespace fmt::internal;
+// 	auto EscCodeMaker = make_foreground_color<char>(color_type(DesiredColor));
+// 	ColorEscapeCode.append(EscCodeMaker.begin());
+// }
 
 static void TerminalColorEscape(fmt::color DesiredColor, std::string& ColorEscapeCode)
 {

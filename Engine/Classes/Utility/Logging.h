@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Core/EngineCore.h"
-#include "fmt/format.h"
 
 // #define Entry_LogType(Name, Idx)
 

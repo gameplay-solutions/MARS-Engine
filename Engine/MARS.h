@@ -1,6 +1,6 @@
 #include "Core/EngineCore.h"
 
-#if PLATFORM_WINDOWS
+#ifdef PLATFORM_WINDOWS
 
 extern MARS::Application* MARS::CreateApplication();
 
