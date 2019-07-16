@@ -6,8 +6,7 @@ The goal of MARS is to be a Platform Agnostic solution to creating games, allowi
 The idea for MARS originally came about when we wanted to create something unique, something that was our own. 
 A Game Engine seemed like a huge task and a large challenge which added to the the enjoyment of working on it.
 
-MARS is 100% a passion project, we work on it because we enjoy it. We have the hope of being able to present MARS as a workable Engine
-at some point, however that isn't the point of the project.
+MARS is 100% a passion project, we work on it because we enjoy it.
 
 # Planned Features
 - [ ] Completely abstracted Rendering API with the ability to hotswap the renderer you are using with a simple console command.
