@@ -83,7 +83,6 @@ link_directories(
 )
 
 add_library(MARS SHARED ${HDRS} ${SRCS})
-# End MARS
 
 target_link_libraries( MARS
 	${OPENGL_LIBRARIES}
@@ -94,6 +93,7 @@ target_link_libraries( MARS
 	SDL2test.lib
 	ImGui.lib
 )
+# End MARS
 
 # Begin MARSEditor
 

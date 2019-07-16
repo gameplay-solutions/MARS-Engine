@@ -13,6 +13,12 @@ namespace MARS
 	{
 	public:
 
+#ifndef PLATFORM_WINSTORE
+		using WindowType = HWND;
+#else
+		typedef Windows::UI::Core::CoreWindow^ WindowType;
+#endif
+
 		Windows_PlatformHandler(const WindowProps& Props);
 		virtual ~Windows_PlatformHandler();
 

@@ -27,6 +27,8 @@ public:
 		PushOverlay(new MARS::ImGuiLayer());
 	}
 	~MARSEditor(){}
+
+	
 };
 
 MARS::Application* MARS::CreateApplication()

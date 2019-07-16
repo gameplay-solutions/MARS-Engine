@@ -38,7 +38,7 @@ namespace MARS
 
 	#define EVENT_CLASS_CATEGORY(x) virtual int32 GetCategoryFlags() const override { return x; }
 
-	class __declspec(dllexport) Event
+	class EXPORT_TYPE Event
 	{
 		friend class EventDispatcher;
 

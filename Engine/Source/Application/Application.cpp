@@ -5,7 +5,7 @@
 namespace MARS
 {
 	Application* Application::Instance = nullptr;
-	
+
 	Application::Application()
 	{
 		Instance = this;

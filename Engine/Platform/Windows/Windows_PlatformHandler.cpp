@@ -1,15 +1,13 @@
 #include "Windows_PlatformHandler.h"
-#include "Rendering/GraphicsContext.h"
 #include "Core/Events/ApplicationEvent.h"
 #include "Core/Events/MouseEvent.h"
 #include "Core/Events/KeyEvent.h"
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
-static bool s_bGLFWInit = false;
-
 namespace MARS
 {
+	static bool s_bGLFWInit = false;
 
 	Windows_PlatformHandler::Windows_PlatformHandler(const WindowProps& Props)
 	{

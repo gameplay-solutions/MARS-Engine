@@ -63,7 +63,7 @@ void Log::Read(const LogTypeFlags Type /*= FlLogALL*/, bool CombineAll /*= true*
 	else
 	{
 		if (!CombineAll)
-		for (int C = 0; C < LogMAX; ++C)
+		for (int32 C = 0; C < LogMAX; ++C)
 		{
 			if ((Type & ToLogFlag(LogType(C))) != 0)
 			{
@@ -80,7 +80,7 @@ void Log::Read(const LogTypeFlags Type /*= FlLogALL*/, bool CombineAll /*= true*
 		{
 			std::vector<LogEntry> LocalEntries;
 
-			for (int C = 0; C < LogMAX; ++C)
+			for (int32 C = 0; C < LogMAX; ++C)
 			{
 				if ((Type & ToLogFlag(LogType(C))) != 0)
 				{
