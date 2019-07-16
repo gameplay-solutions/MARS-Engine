@@ -1,6 +1,13 @@
 ![Gameplay Solutions Logo](http://gameplay.solutions/wp-content/uploads/2017/11/GSLogo_large-300x169.png)
 # What is MARS?
-MARS is a Open Source 3D Game Engine in development by Gameplay.Solutions. The goal of MARS is to be a Platform Agnostic solution to creating games, allowing anyone to be able to make a game regardless of the OS they are currently using.
+MARS is a Open Source 3D Game Engine in development by Gameplay.Solutions. 
+The goal of MARS is to be a Platform Agnostic solution to creating games, allowing anyone to be able to make a game regardless of the OS they are currently using.
+
+The idea for MARS originally came about when we wanted to create something unique, something that was our own. 
+A Game Engine seemed like a huge task and a large challenge which added to the the enjoyment of working on it.
+
+MARS is 100% a passion project, we work on it because we enjoy it. We have the hope of being able to present MARS as a workable Engine
+at some point, however that isn't the point of the project.
 
 # Planned Features
 - [ ] Completely abstracted Rendering API with the ability to hotswap the renderer you are using with a simple console command.
@@ -9,15 +16,24 @@ MARS is a Open Source 3D Game Engine in development by Gameplay.Solutions. The g
 - [ ] AI Suite
 - [ ] Complete Entity Component System
 - [ ] Networking Layer
-- [ ] Robust logging system
-- [ ] Custom data types (Array, Map, Vector, etc)
-
+- [x] Robust logging system
+- [ ] Custom data types (Array, Map, Vector, etc) (in-progress)
+- [ ] Custom Platform Layer to allow the engine to run anywhere (in-progress)
+- [x] Robust event system
+- [ ] Built in input polling/buffer (in-progress)
+- [ ] MARS Tool Framework -- A suite of tools designed to make working with MARS easy. (Class Tool, Project Setup Tool, etc)
+- [ ] Easy to use Editor (in-progress)
+- [ ] Custom Multi-threading class to easily create mutli-threaded game code
 
 # Supported Platforms
+ - [x] Windows 10 (x64)
+ - [ ] Linux (Partial Support)
+ - [ ] Mac OSX
+ - [ ] PlayStation
+ - [ ] Xbox
 
 # Implemented Rendering APIs
-
-- [x] DirectX 11
+- [ ] DirectX 11
 - [ ] DirectX 12
 - [ ] Vulkan
-- [ ] OpenGL 4.x
+- [ ] OpenGL 4.6 (In-Progress)
