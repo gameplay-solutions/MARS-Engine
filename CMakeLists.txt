@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.6.3)
 project(MARS)
 
 if(MSVC)
-	add_definitions(-c -W4)
+	add_definitions(-c -W2)
 else()
 	add_definitions(-c -Wall -msse2)
 endif()
@@ -117,6 +117,8 @@ target_link_libraries(MARS ImGui)
 
 set_property(DIRECTORY ${MARS_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT MARSEditor)
 # End MARSEditor
+
+set_target_properties(MARS PROPERTIES CXX_STANDARD 17)
 
 if(WIN32)
 	string(REPLACE "/" "\\" source_path_windows "${MARS_SOURCE_DIR}/Resources")

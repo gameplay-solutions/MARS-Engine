@@ -1,6 +1,7 @@
 #include "Application/Application.h"
 #include "Core/Layers/Layer.h"
 #include "glad/glad.h"
+#include "Input/InputHandler.h"
 
 namespace MARS
 {
@@ -39,6 +40,8 @@ namespace MARS
 				It->OnUpdate();
 			}
 
+			auto[x, y] = Input::GetMousePos();
+
 			WindowPtr->OnUpdate();
 		}
 	}
@@ -57,7 +60,7 @@ namespace MARS
 			}
 		}
 
-		Log::Get(LogTemp).Info("{}", e.ToString());
+		// Log::Get(LogTemp).Info("{}", e.ToString());
 	}
 
 	void Application::PushLayer(Layer* InLayer)

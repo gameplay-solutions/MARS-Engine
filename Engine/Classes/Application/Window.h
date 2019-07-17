@@ -31,6 +31,8 @@ namespace MARS
 		virtual void SetVSync(bool bEnabled) = 0;
 		virtual bool IsUsingVSync() const = 0;
 
+		virtual void* GetNativeWindow() const = 0;
+
 		static Window* Create(const WindowProps& WindowProperties = WindowProps());
 	};
 }

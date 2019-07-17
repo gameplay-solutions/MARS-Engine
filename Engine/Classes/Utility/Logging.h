@@ -81,7 +81,7 @@ struct LogEntry
 	LogEntry() {}
 };
 
-class EXPORT_TYPE CategoricLog
+class CategoricLog
 {
 	LogType Type;
 
@@ -178,7 +178,7 @@ private:
 	friend class Log;
 };
 
-class EXPORT_TYPE Log
+class Log
 {
 	/** 
 	 * @note(devlinw): chris says "Using vectors instead of maps here because it will force everything to be linear in memory

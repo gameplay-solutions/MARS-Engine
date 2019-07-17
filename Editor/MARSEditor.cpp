@@ -4,18 +4,18 @@ class TestLayer : public MARS::Layer
 {
 public:
 
-	TestLayer() : Layer("Test") {}
+	TestLayer() : Layer("Test") { }
 
 	void OnUpdate() override
 	{
-		//Log::Get(LogTemp).Info("{}", GetName());
-		//std::cout << GetName() << std::endl;
+		if (MARS::Input::IsKeyPressed(Keys::A))
+		{
+			std::cout << "Key Pressed" << std::endl;
+		}
 	}
 
 	void OnEvent(MARS::Event& InEvent) override
 	{
-		//Log::Get(LogTemp).Info("{}", InEvent.ToString());
-		std::cout << InEvent.ToString().c_str() << std::endl;
 	}
 };
 
@@ -24,6 +24,7 @@ class MARSEditor : public MARS::Application
 public:
 	MARSEditor()
 	{
+		PushLayer(new TestLayer());
 		PushOverlay(new MARS::ImGuiLayer());
 	}
 	~MARSEditor(){}

@@ -29,6 +29,8 @@ namespace MARS
 		virtual void SetVSync(bool bEnabled) override;
 		virtual bool IsUsingVSync() const override;
 
+		inline virtual void* GetNativeWindow() const { return Window; }
+
 	private:
 
 		void InitWindow(const WindowProps& Props);
