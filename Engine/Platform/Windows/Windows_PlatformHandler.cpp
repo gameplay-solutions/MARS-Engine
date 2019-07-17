@@ -51,6 +51,11 @@ namespace MARS
 		return Data.VSync;
 	}
 
+	Window* Window::Create(const WindowProps& Props)
+	{
+		return new Windows_PlatformHandler(Props);
+	}
+
 	void Windows_PlatformHandler::InitWindow(const WindowProps& Props)
 	{
 		Data.Title = Props.Title;
@@ -169,10 +174,5 @@ namespace MARS
 	void Windows_PlatformHandler::ShutdownWindow()
 	{
 		glfwDestroyWindow(Window);
-	}
-
-	Window* Window::Create(const WindowProps& Props)
-	{
-		return new Windows_PlatformHandler(Props);
 	}
 }
