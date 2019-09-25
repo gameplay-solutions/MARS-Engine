@@ -24,7 +24,5 @@ namespace MARS
 
 	protected:
 		float m_Time = 0.f;
-		bool bGL3Init = false;
-
 	};
 }

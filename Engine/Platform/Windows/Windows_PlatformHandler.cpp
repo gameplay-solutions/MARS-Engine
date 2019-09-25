@@ -21,7 +21,7 @@ namespace MARS
 		ShutdownWindow();
 	}
 
-	void Windows_PlatformHandler::OnUpdate()
+	void Windows_PlatformHandler::Refresh()
 	{
 		glfwPollEvents();
 		glfwSwapBuffers(m_Window);
@@ -65,7 +65,7 @@ namespace MARS
 		Data.Width = Props.Width;
 		Data.Height = Props.Height;
 
-		Log::Get(LogGraphics).Info("Starting m_Window Construction. Platform: Windows");
+		Log::Get(LogGraphics).Info("Loading MARS Platform Layer");
 		if (!s_bGLFWInit)
 		{
 			int32 SuccessCode = glfwInit();

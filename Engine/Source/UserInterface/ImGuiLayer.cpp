@@ -9,22 +9,23 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "imgui/imgui_internal.h"
 
 MARS::ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer") {}
 MARS::ImGuiLayer::~ImGuiLayer() { Log::Get(LogTemp).Info("ImGuiLayer Shutdown"); }
 
 void MARS::ImGuiLayer::OnAttach()
 {
-	// Setup Dear ImGui context
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
+
+	Log::Get(LogTemp).Info("{}", BIT(0));
+	Log::Get(LogTemp).Info("{}", BIT(6));
+	Log::Get(LogTemp).Info("{}", BIT(10));
 	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;       // Enable Keyboard Controls
-	//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
 	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
-	io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
-	//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
-	//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoMerge;
+	io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 
 	// Setup Dear ImGui style
 	ImGui::StyleColorsDark();
@@ -53,17 +54,17 @@ void MARS::ImGuiLayer::OnDetach()
 	ImGui::DestroyContext();
 }
 
-void MARS::ImGuiLayer::RenderLayerUI()
-{
-	static bool show = true;
-	ImGui::ShowDemoWindow(&show);
-}
-
 void MARS::ImGuiLayer::OnBegin()
 {
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
+}
+
+void MARS::ImGuiLayer::RenderLayerUI()
+{
+	static bool show = true;
+	ImGui::ShowDemoWindow(&show);
 }
 
 void MARS::ImGuiLayer::OnEnd()
@@ -72,7 +73,6 @@ void MARS::ImGuiLayer::OnEnd()
 	Application& app = Application::Get();
 	io.DisplaySize = ImVec2((float)app.GetWindow().GetWidth(), (float)app.GetWindow().GetHeight());
 
-	// Rendering
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 

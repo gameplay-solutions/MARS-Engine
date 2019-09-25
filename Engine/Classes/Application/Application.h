@@ -38,11 +38,10 @@ namespace MARS
 		bool OnWindowClose(WindowCloseEvent& e);
 
 		std::unique_ptr<Window> WindowPtr;
-		ImGuiLayer* ImguiLayerPtr;
-		bool bRunning;
+		bool bRunning = false;
 		MStack<Layer> m_LayerStack;
-
 		static Application* Instance;
+		ImGuiLayer* ImGuiLayerPtr;
 	};
 
 	Application* CreateApplication();

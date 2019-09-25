@@ -16,7 +16,7 @@ namespace MARS
 		Windows_PlatformHandler(const WindowProps& Props);
 		virtual ~Windows_PlatformHandler();
 
-		void OnUpdate() override;
+		void Refresh() override;
 		virtual uint32 GetWidth() const override;
 		virtual uint32 GetHeight() const override;
 		virtual void SetEventCallback(const EventCallback& CallbackFunction) override;
