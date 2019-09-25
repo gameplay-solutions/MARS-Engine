@@ -84,6 +84,24 @@ link_directories(
 
 add_library(MARS SHARED ${HDRS} ${SRCS})
 
+add_library(ImGui STATIC 
+	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imgui.cpp
+	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imgui.h
+	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imgui_demo.cpp
+	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imgui_draw.cpp
+	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imgui_internal.h
+	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imgui_widgets.cpp
+	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imstb_rectpack.h
+	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imstb_textedit.h
+	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imstb_truetype.h
+	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imconfig.h
+	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/examples/imgui_impl_glfw.h
+	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/examples/imgui_impl_glfw.cpp
+	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/examples/imgui_impl_opengl3.h
+	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/examples/imgui_impl_opengl3.cpp
+)
+target_link_libraries(MARS ImGui)
+
 target_link_libraries( MARS
 	${OPENGL_LIBRARIES}
 	glfw3.lib
@@ -100,20 +118,6 @@ target_link_libraries( MARS
 
 add_executable(MARSEditor ${EDITOR_HDRS} ${EDITOR_SRCS})
 target_link_libraries(MARSEditor MARS)
-
-add_library(ImGui STATIC 
-	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imgui.cpp
-	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imgui.h
-	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imgui_demo.cpp
-	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imgui_draw.cpp
-	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imgui_internal.h
-	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imgui_widgets.cpp
-	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imstb_rectpack.h
-	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imstb_textedit.h
-	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imstb_truetype.h
-	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imconfig.h
-)
-target_link_libraries(MARS ImGui)
 
 set_property(DIRECTORY ${MARS_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT MARSEditor)
 # End MARSEditor

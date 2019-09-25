@@ -1,5 +1,4 @@
 #include "Application/Application.h"
-#include "Core/Layers/Layer.h"
 #include "glad/glad.h"
 #include "Input/InputHandler.h"
 
@@ -15,6 +14,10 @@ namespace MARS
 		bRunning = true;
 
 		WindowPtr->SetEventCallback(BIND_EVENT_ONE_PARAM(Application::OnEvent));
+
+		ImguiLayerPtr = new ImGuiLayer;
+
+		PushOverlay(ImguiLayerPtr);
 	}
 
 	Application::~Application()
@@ -35,10 +38,11 @@ namespace MARS
 			glClearColor(0.1, 0.1, 0.1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			for (auto* It : m_LayerStack)
-			{
-				It->OnUpdate();
-			}
+			for (auto* It : m_LayerStack) It->OnUpdate();
+
+			ImguiLayerPtr->OnBegin();
+			for (auto* Element : m_LayerStack) Element->RenderLayerUI();
+			ImguiLayerPtr->OnEnd();
 
 			auto[x, y] = Input::GetMousePos();
 
@@ -60,12 +64,12 @@ namespace MARS
 			}
 		}
 
-		// Log::Get(LogTemp).Info("{}", e.ToString());
+		Log::Get(LogTemp).Info("{}", e.ToString());
 	}
 
 	void Application::PushLayer(Layer* InLayer)
 	{
-		m_LayerStack.PushLayer(InLayer);
+		m_LayerStack.PushElement(InLayer);
 		InLayer->OnAttach();
 	}
 

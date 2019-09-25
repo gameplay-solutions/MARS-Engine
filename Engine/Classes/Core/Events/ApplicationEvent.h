@@ -14,7 +14,7 @@ namespace MARS
 		inline uint32 GetHeight() const { return Height; }
 
 		EVENT_CLASS_CATEGORY(CategoryApplication)
-			EVENT_CLASS_TYPE(WindowResize)
+		EVENT_CLASS_TYPE(WindowResize)
 
 	private:
 

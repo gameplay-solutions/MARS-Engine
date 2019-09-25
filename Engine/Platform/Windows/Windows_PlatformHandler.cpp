@@ -1,13 +1,15 @@
 #include "Windows_PlatformHandler.h"
+#include "Rendering/GraphicsContext.h"
 #include "Core/Events/ApplicationEvent.h"
 #include "Core/Events/MouseEvent.h"
 #include "Core/Events/KeyEvent.h"
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
+static bool s_bGLFWInit = false;
+
 namespace MARS
 {
-	static bool s_bGLFWInit = false;
 
 	Windows_PlatformHandler::Windows_PlatformHandler(const WindowProps& Props)
 	{
@@ -22,7 +24,7 @@ namespace MARS
 	void Windows_PlatformHandler::OnUpdate()
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(Window);
+		glfwSwapBuffers(m_Window);
 	}
 
 	uint32 Windows_PlatformHandler::GetWidth() const
@@ -51,9 +53,10 @@ namespace MARS
 		return Data.VSync;
 	}
 
-	Window* Window::Create(const WindowProps& Props)
+
+	void* Windows_PlatformHandler::GetNativeWindow() const
 	{
-		return new Windows_PlatformHandler(Props);
+		return m_Window;
 	}
 
 	void Windows_PlatformHandler::InitWindow(const WindowProps& Props)
@@ -62,7 +65,7 @@ namespace MARS
 		Data.Width = Props.Width;
 		Data.Height = Props.Height;
 
-		Log::Get(LogGraphics).Info("Starting Window Construction. Platform: Windows");
+		Log::Get(LogGraphics).Info("Starting m_Window Construction. Platform: Windows");
 		if (!s_bGLFWInit)
 		{
 			int32 SuccessCode = glfwInit();
@@ -71,14 +74,14 @@ namespace MARS
 			s_bGLFWInit = true;
 		}
 
-		Window = glfwCreateWindow((int)Props.Width, (int)Props.Height, Data.Title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(Window);
+		m_Window = glfwCreateWindow((int)Props.Width, (int)Props.Height, Data.Title.c_str(), nullptr, nullptr);
+		glfwMakeContextCurrent(m_Window);
 		int32 Status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		Assert(Status, "Failed to Init GLAD")
-		glfwSetWindowUserPointer(Window, &Data);
+		glfwSetWindowUserPointer(m_Window, &Data);
 		SetVSync(true);
 
-		glfwSetWindowSizeCallback(Window, [](GLFWwindow* InWindow, int32 Width, int32 Height)
+		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* InWindow, int32 Width, int32 Height)
 		{
 			WindowData& _Data = *(WindowData*)glfwGetWindowUserPointer(InWindow);
 			_Data.Width = Width;
@@ -88,14 +91,14 @@ namespace MARS
 			_Data.EventCallbackFunction(_Event);
 		});
 
-		glfwSetWindowCloseCallback(Window, [](GLFWwindow* InWindow)
+		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* InWindow)
 		{
 			WindowData& _Data = *(WindowData*)glfwGetWindowUserPointer(InWindow);
 			WindowCloseEvent _Event;
 			_Data.EventCallbackFunction(_Event);
 		});
 
-		glfwSetKeyCallback(Window, [](GLFWwindow* InWindow, int32 Key, int32 Scancode, int32 Action, int32 Mods)
+		glfwSetKeyCallback(m_Window, [](GLFWwindow* InWindow, int32 Key, int32 Scancode, int32 Action, int32 Mods)
 		{
 			Scancode, Mods;
 			WindowData& _Data = *(WindowData*)glfwGetWindowUserPointer(InWindow);
@@ -124,14 +127,14 @@ namespace MARS
 			}
 		});
 
-		glfwSetCharCallback(Window, [](GLFWwindow* InWindow, uint32 Char)
+		glfwSetCharCallback(m_Window, [](GLFWwindow* InWindow, uint32 Char)
 		{
 			WindowData& _Data = *(WindowData*)glfwGetWindowUserPointer(InWindow);
 			KeyTypedEvent _Event(Char);
 			_Data.EventCallbackFunction(_Event);
 		});
 
-		glfwSetMouseButtonCallback(Window, [](GLFWwindow* InWindow, int32 Button, int32 Action, int32 Mods)
+		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* InWindow, int32 Button, int32 Action, int32 Mods)
 		{
 			Mods;
 			
@@ -154,7 +157,7 @@ namespace MARS
 			}
 		});
 
-		glfwSetScrollCallback(Window, [](GLFWwindow * InWindow, double xOffset, double yOffset)
+		glfwSetScrollCallback(m_Window, [](GLFWwindow * InWindow, double xOffset, double yOffset)
 		{
 			WindowData& _Data = *(WindowData*)glfwGetWindowUserPointer(InWindow);
 
@@ -162,7 +165,7 @@ namespace MARS
 			_Data.EventCallbackFunction(_Event);
 		});
 
-		glfwSetCursorPosCallback(Window, [](GLFWwindow* InWindow, double xPos, double yPos)
+		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* InWindow, double xPos, double yPos)
 		{
 			WindowData& _Data = *(WindowData*)glfwGetWindowUserPointer(InWindow);
 
@@ -173,6 +176,11 @@ namespace MARS
 
 	void Windows_PlatformHandler::ShutdownWindow()
 	{
-		glfwDestroyWindow(Window);
+		glfwDestroyWindow(m_Window);
+	}
+
+	Window* Window::Create(const WindowProps& Props)
+	{
+		return new Windows_PlatformHandler(Props);
 	}
 }

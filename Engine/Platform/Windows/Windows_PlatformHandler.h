@@ -13,12 +13,6 @@ namespace MARS
 	{
 	public:
 
-#ifndef PLATFORM_WINSTORE
-		using WindowType = HWND;
-#else
-		typedef Windows::UI::Core::CoreWindow^ WindowType;
-#endif
-
 		Windows_PlatformHandler(const WindowProps& Props);
 		virtual ~Windows_PlatformHandler();
 
@@ -28,15 +22,14 @@ namespace MARS
 		virtual void SetEventCallback(const EventCallback& CallbackFunction) override;
 		virtual void SetVSync(bool bEnabled) override;
 		virtual bool IsUsingVSync() const override;
-
-		inline virtual void* GetNativeWindow() const { return Window; }
+		virtual void* GetNativeWindow() const override;
 
 	private:
 
 		void InitWindow(const WindowProps& Props);
 		void ShutdownWindow();
 
-		GLFWwindow* Window;
+		GLFWwindow* m_Window;
 
 		struct WindowData
 		{

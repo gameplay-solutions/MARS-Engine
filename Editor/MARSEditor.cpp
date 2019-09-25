@@ -1,4 +1,6 @@
 #include <MARSCore.h>
+#include "Input\InputHandler.h"
+#include "Input\Keys.h"
 
 class TestLayer : public MARS::Layer
 {
@@ -10,7 +12,7 @@ public:
 	{
 		if (MARS::Input::IsKeyPressed(Keys::A))
 		{
-			std::cout << "Key Pressed" << std::endl;
+			std::cout << "Key Pressed \n";
 		}
 	}
 
@@ -25,11 +27,8 @@ public:
 	MARSEditor()
 	{
 		PushLayer(new TestLayer());
-		PushOverlay(new MARS::ImGuiLayer());
 	}
 	~MARSEditor(){}
-
-	
 };
 
 MARS::Application* MARS::CreateApplication()

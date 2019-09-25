@@ -2,9 +2,9 @@
 
 #ifdef PLATFORM_WINDOWS
 
-MARS::Application* MARS::CreateApplication();
+extern MARS::Application* MARS::CreateApplication();
 
-int32 main(int32 argc, char* argv[])
+int main(int argc, char** argv)
 {
 	if (argc > 1)
 	{
