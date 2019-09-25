@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Core/EngineCore.h"
+#include "Types\CoreTypes.h"
+#include <utility>
 
 namespace MARS
 {

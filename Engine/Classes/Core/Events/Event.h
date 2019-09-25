@@ -49,7 +49,7 @@ namespace MARS
 		virtual int32 GetCategoryFlags() const = 0;
 		virtual String ToString() const { return GetName(); }
 
-		__forceinline bool IsEventHandled() const { return bEventHandled; }
+		FORCEINLINE bool IsEventHandled() const { return bEventHandled; }
 
 		inline bool IsInCategory(EventCategory InCategory)
 		{

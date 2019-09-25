@@ -20,6 +20,7 @@
 #include "Core/Asserts.h"
 #include "fmt/format.h"
 #include "Core/Events/Event.h"
+#include "Types/Stack.h"
 
 #include "glm/vec2.hpp"
 #include "glm/vec3.hpp"

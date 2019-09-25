@@ -22,7 +22,7 @@ namespace MARS
 
 		using EventCallback = std::function<void(Event&)>;
 
-		virtual void OnUpdate() = 0;
+		virtual void Refresh() = 0;
 
 		virtual uint32 GetWidth() const = 0;
 		virtual uint32 GetHeight() const = 0;

@@ -1,5 +1,4 @@
 #include "Application/Application.h"
-#include "Core/Layers/Layer.h"
 #include "glad/glad.h"
 #include "Input/InputHandler.h"
 
@@ -9,12 +8,13 @@ namespace MARS
 
 	Application::Application()
 	{
-		Instance = this;
-
-		WindowPtr = std::unique_ptr<Window>(Window::Create());
 		bRunning = true;
-
+		Instance = this;
+		WindowPtr = std::unique_ptr<Window>(Window::Create());
 		WindowPtr->SetEventCallback(BIND_EVENT_ONE_PARAM(Application::OnEvent));
+
+		ImGuiLayerPtr = new ImGuiLayer;
+		PushOverlay(ImGuiLayerPtr);
 	}
 
 	Application::~Application()
@@ -24,7 +24,7 @@ namespace MARS
 
 	void Application::InitMARS()
 	{
-		Log::Get(LogInit).Info("MARS has started");
+		Log::Get(LogInit).Info("MARS Pre-Init Completed with 0 errors."); // TODO update this when the error log is written.
 		Run();
 	}
 
@@ -35,14 +35,15 @@ namespace MARS
 			glClearColor(0.1, 0.1, 0.1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			for (auto* It : m_LayerStack)
+			ImGuiLayerPtr->OnBegin();
+			for (auto* Element : m_LayerStack) 
 			{
-				It->OnUpdate();
+				Element->OnUpdate();
+				Element->RenderLayerUI();
 			}
+			ImGuiLayerPtr->OnEnd();
 
-			auto[x, y] = Input::GetMousePos();
-
-			WindowPtr->OnUpdate();
+			WindowPtr->Refresh();
 		}
 	}
 
@@ -59,13 +60,11 @@ namespace MARS
 				break;
 			}
 		}
-
-		// Log::Get(LogTemp).Info("{}", e.ToString());
 	}
 
 	void Application::PushLayer(Layer* InLayer)
 	{
-		m_LayerStack.PushLayer(InLayer);
+		m_LayerStack.PushElement(InLayer);
 		InLayer->OnAttach();
 	}
 

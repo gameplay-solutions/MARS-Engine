@@ -3,9 +3,7 @@
 #include "Core/EngineCore.h"
 #include "Application/Window.h"
 #include "Core/Events/ApplicationEvent.h"
-#include "Core/Layers/LayerStack.h"
-
-class Layer;
+#include "UserInterface/ImGuiLayer.h"
 
 namespace MARS
 {
@@ -40,10 +38,10 @@ namespace MARS
 		bool OnWindowClose(WindowCloseEvent& e);
 
 		std::unique_ptr<Window> WindowPtr;
-		bool bRunning;
-		LayerStack m_LayerStack;
-
+		bool bRunning = false;
+		MStack<Layer> m_LayerStack;
 		static Application* Instance;
+		ImGuiLayer* ImGuiLayerPtr;
 	};
 
 	Application* CreateApplication();

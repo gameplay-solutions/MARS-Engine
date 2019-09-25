@@ -8,6 +8,11 @@ MARS::Input* MARS::Input::Instance = new WindowsInput();
 bool MARS::WindowsInput::IsKeyPressed_Implementation(int32 Key)
 {
 	auto _Window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
+	
+	if (!_Window)
+	{
+		return false;
+	}
 	auto _State = glfwGetKey(_Window, Key);
 	return _State == GLFW_PRESS || _State == GLFW_REPEAT;
 
