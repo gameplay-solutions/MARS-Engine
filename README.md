@@ -1,4 +1,4 @@
-![Gameplay Solutions Logo](http://gameplay.solutions/wp-content/uploads/2017/11/GSLogo_large-300x169.png)
+![Gameplay Solutions Logo](https://media.discordapp.net/attachments/494323799441932298/617509643417157632/gameplay-transparent-5.png)
 # What is MARS?
 MARS is a C++, Open Source, 3D Game Engine in development by Gameplay.Solutions. 
 The goal of MARS is to be a Platform Agnostic solution to creating games, allowing anyone to be able to make a game regardless of the OS they are currently using.
