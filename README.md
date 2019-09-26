@@ -17,10 +17,16 @@ to submit a pull request. We're open to feedback.
 - [ ] Complete Entity Component System
 - [ ] Networking Layer
 - [x] Robust logging system
-- [ ] Custom data types (Array, Map, Vector, etc) (in-progress)
-- [ ] Custom Platform Layer to allow the engine to run anywhere (in-progress)
+- Custom data types (Array, Map, Vector, etc) (in-progress)
+ -  - [x] Stack
+-  - [ ] Array
+-  - [ ] Map
+-  - [ ] String
+-  - [ ] Vector
+-  - [ ] Tuple
+- [x] Custom Platform Layer to allow the engine to run anywhere
 - [x] Robust event system
-- [ ] Built in input polling/buffer (in-progress)
+- [x] Built in input polling/buffer
 - [ ] MARS Tool Framework -- A suite of tools designed to make working with MARS easy. (Class Tool, Project Setup Tool, etc)
 - [ ] Easy to use Editor (in-progress)
 - [ ] Custom Multi-threading class to easily create mutli-threaded game code
