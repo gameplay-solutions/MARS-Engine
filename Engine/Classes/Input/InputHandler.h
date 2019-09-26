@@ -5,7 +5,7 @@
 
 namespace MARS
 {
-	class EXPORT_TYPE Input
+	class Input
 	{
 	public:
 		

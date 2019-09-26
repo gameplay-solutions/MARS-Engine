@@ -82,7 +82,7 @@ link_directories(
 	${MARS_SOURCE_DIR}/Thirdparty/Libs
 )
 
-add_library(MARS SHARED ${HDRS} ${SRCS})
+add_library(MARS STATIC ${HDRS} ${SRCS})
 
 add_library(ImGui STATIC 
 	${MARS_SOURCE_DIR}/Thirdparty/Includes/imgui/imgui.cpp
@@ -109,7 +109,7 @@ target_link_libraries( MARS
 	SDL2.lib
 	SDL2main.lib
 	SDL2test.lib
-	ImGui.lib
+	#ImGui.lib
 )
 # End MARS
 

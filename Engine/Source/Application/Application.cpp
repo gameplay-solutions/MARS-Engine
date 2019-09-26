@@ -1,6 +1,7 @@
 #include "Application/Application.h"
 #include "glad/glad.h"
 #include "Input/InputHandler.h"
+#include "UserInterface/ImGuiLayer.h"
 
 namespace MARS
 {
@@ -38,10 +39,11 @@ namespace MARS
 			ImGuiLayerPtr->OnBegin();
 			for (auto* Element : m_LayerStack) 
 			{
-				Element->OnUpdate();
+				/*Element->OnUpdate();*/
 				Element->RenderLayerUI();
 			}
 			ImGuiLayerPtr->OnEnd();
+
 
 			WindowPtr->Refresh();
 		}

@@ -3,10 +3,12 @@
 #include "Core/EngineCore.h"
 #include "Application/Window.h"
 #include "Core/Events/ApplicationEvent.h"
-#include "UserInterface/ImGuiLayer.h"
 
 namespace MARS
 {
+	class Layer;
+	class ImGuiLayer;
+
 	class EXPORT_TYPE Application
 	{
 	public:

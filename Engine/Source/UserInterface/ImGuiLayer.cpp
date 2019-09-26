@@ -1,15 +1,12 @@
-#include "Core/EngineCore.h"
 #include "UserInterface/ImGuiLayer.h"
-
 #include "imgui/imgui.h"
+
 #include "imgui/examples/imgui_impl_glfw.h"
 #include "imgui/examples/imgui_impl_opengl3.h"
 
 #include "Application/Application.h"
 
-#include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include "imgui/imgui_internal.h"
 
 MARS::ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer") {}
 MARS::ImGuiLayer::~ImGuiLayer() { Log::Get(LogTemp).Info("ImGuiLayer Shutdown"); }
@@ -37,7 +34,7 @@ void MARS::ImGuiLayer::OnAttach()
 	GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
 
 	ImGui_ImplGlfw_InitForOpenGL(window, true);
-	ImGui_ImplOpenGL3_Init("#version 410");
+	ImGui_ImplOpenGL3_Init();
 }
 
 void MARS::ImGuiLayer::OnDetach()
@@ -68,7 +65,6 @@ void MARS::ImGuiLayer::OnEnd()
 
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
 	if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
 	{
 		GLFWwindow* backup_current_context = glfwGetCurrentContext();
