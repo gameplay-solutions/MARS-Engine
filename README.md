@@ -17,8 +17,8 @@ to submit a pull request. We're open to feedback.
 - [ ] Complete Entity Component System
 - [ ] Networking Layer
 - [x] Robust logging system
-- Custom data types (Array, Map, Vector, etc) (in-progress)
- -  - [x] Stack
+- [ ] Custom data types (Array, Map, Vector, etc) (in-progress)
+-  - [x] Stack
 -  - [ ] Array
 -  - [ ] Map
 -  - [ ] String
@@ -34,8 +34,8 @@ to submit a pull request. We're open to feedback.
 - [ ] In-Editor Visual Scripting Language for designers and artists
 
 # Supported Platforms
- - [x] Windows 10 (x64)
- - [ ] Linux (Partial Support)
+ - [x] Windows 10 (x64) [primary priority]
+ - [ ] Linux (Partial Support) [secondary priority]
  - [ ] Mac OSX
  - [ ] PlayStation
  - [ ] Xbox
