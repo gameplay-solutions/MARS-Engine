@@ -3,6 +3,8 @@
 #include "Core/EngineCore.h"
 
 // #define Entry_LogType(Name, Idx)
+#pragma warning(push)
+#pragma warning(disable:26495)
 
 #define Entries_LogType			\
 Entry_LogType(LogTemp, 0)		\
@@ -226,3 +228,4 @@ private:
 	static void PrintLog(const LogEntry& Log);
 	static void PrintLog(const LogType Type, const std::string& LogText, uint64 Timestamp, const LogImportance Importance = LI_Info);
 };
+#pragma warning(pop)

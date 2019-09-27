@@ -11,6 +11,8 @@
 MARS::ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer") {}
 MARS::ImGuiLayer::~ImGuiLayer() { Log::Get(LogTemp).Info("ImGuiLayer Shutdown"); }
 
+bool MARS::ImGuiLayer::bShowDebugMenu = true;
+
 void MARS::ImGuiLayer::OnAttach()
 {
 	IMGUI_CHECKVERSION();
@@ -53,8 +55,7 @@ void MARS::ImGuiLayer::OnBegin()
 
 void MARS::ImGuiLayer::RenderLayerUI()
 {
-	static bool show = true;
-	ImGui::ShowDemoWindow(&show);
+	ImGui::ShowDemoWindow(&bShowDebugMenu);
 }
 
 void MARS::ImGuiLayer::OnEnd()

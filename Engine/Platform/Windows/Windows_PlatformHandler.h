@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Application/Window.h"
+#include "Rendering/RenderContext.h"
 
 struct GLFWwindow;
 
@@ -30,6 +31,7 @@ namespace MARS
 		void ShutdownWindow();
 
 		GLFWwindow* m_Window;
+		RenderContext* m_Context;
 
 		struct WindowData
 		{
