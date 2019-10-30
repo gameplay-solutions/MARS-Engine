@@ -1,4 +1,4 @@
-![Gameplay Solutions Logo](http://gameplay.solutions/wp-content/uploads/2017/11/GSLogo_large-300x169.png)
+![Gameplay Solutions Logo](https://media.discordapp.net/attachments/494323799441932298/617509643417157632/gameplay-transparent-5.png)
 # What is MARS?
 MARS is a C++, Open Source, 3D Game Engine in development by Gameplay.Solutions. 
 The goal of MARS is to be a Platform Agnostic solution to creating games, allowing anyone to be able to make a game regardless of the OS they are currently using.
@@ -18,9 +18,15 @@ to submit a pull request. We're open to feedback.
 - [ ] Networking Layer
 - [x] Robust logging system
 - [ ] Custom data types (Array, Map, Vector, etc) (in-progress)
-- [ ] Custom Platform Layer to allow the engine to run anywhere (in-progress)
+-  - [x] Stack
+-  - [ ] Array
+-  - [ ] Map
+-  - [ ] String
+-  - [ ] Vector
+-  - [ ] Tuple
+- [x] Custom Platform Layer to allow the engine to run anywhere
 - [x] Robust event system
-- [ ] Built in input polling/buffer (in-progress)
+- [x] Built in input polling/buffer
 - [ ] MARS Tool Framework -- A suite of tools designed to make working with MARS easy. (Class Tool, Project Setup Tool, etc)
 - [ ] Easy to use Editor (in-progress)
 - [ ] Custom Multi-threading class to easily create mutli-threaded game code
@@ -28,8 +34,8 @@ to submit a pull request. We're open to feedback.
 - [ ] In-Editor Visual Scripting Language for designers and artists
 
 # Supported Platforms
- - [x] Windows 10 (x64)
- - [ ] Linux (Partial Support)
+ - [x] Windows 10 (x64) [primary priority]
+ - [ ] Linux (Partial Support) [secondary priority]
  - [ ] Mac OSX
  - [ ] PlayStation
  - [ ] Xbox
