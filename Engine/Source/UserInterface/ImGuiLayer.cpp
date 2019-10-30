@@ -1,18 +1,17 @@
-#include "Core/EngineCore.h"
 #include "UserInterface/ImGuiLayer.h"
-
 #include "imgui/imgui.h"
+
 #include "imgui/examples/imgui_impl_glfw.h"
 #include "imgui/examples/imgui_impl_opengl3.h"
 
 #include "Application/Application.h"
 
-#include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include "imgui/imgui_internal.h"
 
 MARS::ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer") {}
 MARS::ImGuiLayer::~ImGuiLayer() { Log::Get(LogTemp).Info("ImGuiLayer Shutdown"); }
+
+bool MARS::ImGuiLayer::bShowDebugMenu = true;
 
 void MARS::ImGuiLayer::OnAttach()
 {
@@ -20,18 +19,12 @@ void MARS::ImGuiLayer::OnAttach()
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 
-	Log::Get(LogTemp).Info("{}", BIT(0));
-	Log::Get(LogTemp).Info("{}", BIT(6));
-	Log::Get(LogTemp).Info("{}", BIT(10));
-	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;       // Enable Keyboard Controls
-	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+	io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 	io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 
-	// Setup Dear ImGui style
 	ImGui::StyleColorsDark();
-	//ImGui::StyleColorsClassic();
 
-	// When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
 	ImGuiStyle& style = ImGui::GetStyle();
 	if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
 	{
@@ -42,9 +35,8 @@ void MARS::ImGuiLayer::OnAttach()
 	Application& app = Application::Get();
 	GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
 
-	// Setup Platform/Renderer bindings
 	ImGui_ImplGlfw_InitForOpenGL(window, true);
-	ImGui_ImplOpenGL3_Init("#version 410");
+	ImGui_ImplOpenGL3_Init();
 }
 
 void MARS::ImGuiLayer::OnDetach()
@@ -63,8 +55,7 @@ void MARS::ImGuiLayer::OnBegin()
 
 void MARS::ImGuiLayer::RenderLayerUI()
 {
-	static bool show = true;
-	ImGui::ShowDemoWindow(&show);
+	ImGui::ShowDemoWindow(&bShowDebugMenu);
 }
 
 void MARS::ImGuiLayer::OnEnd()
@@ -75,7 +66,6 @@ void MARS::ImGuiLayer::OnEnd()
 
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
 	if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
 	{
 		GLFWwindow* backup_current_context = glfwGetCurrentContext();

@@ -1,9 +1,8 @@
 #include "Windows_PlatformHandler.h"
-#include "Rendering/GraphicsContext.h"
 #include "Core/Events/ApplicationEvent.h"
 #include "Core/Events/MouseEvent.h"
 #include "Core/Events/KeyEvent.h"
-#include "glad/glad.h"
+#include "Rendering/OpenGL/OpenGLContext.h"
 #include "GLFW/glfw3.h"
 
 static bool s_bGLFWInit = false;
@@ -24,7 +23,7 @@ namespace MARS
 	void Windows_PlatformHandler::Refresh()
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(m_Window);
+		m_Context->SwapBuffers();
 	}
 
 	uint32 Windows_PlatformHandler::GetWidth() const
@@ -65,7 +64,7 @@ namespace MARS
 		Data.Width = Props.Width;
 		Data.Height = Props.Height;
 
-		Log::Get(LogGraphics).Info("Loading MARS Platform Layer");
+		Log::Get(LogInit).Info("Constructing a {0}-{1} Window using {2}", Data.Width, Data.Height, "OpenGL 4.3");
 		if (!s_bGLFWInit)
 		{
 			int32 SuccessCode = glfwInit();
@@ -75,9 +74,10 @@ namespace MARS
 		}
 
 		m_Window = glfwCreateWindow((int)Props.Width, (int)Props.Height, Data.Title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(m_Window);
-		int32 Status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		Assert(Status, "Failed to Init GLAD")
+		m_Context = new OpenGLContext(m_Window);
+		m_Context->Init();
+
+		Log::Get(LogInit).Info("{} constructed. Running Platform Init", Data.Title);
 		glfwSetWindowUserPointer(m_Window, &Data);
 		SetVSync(true);
 
@@ -172,10 +172,14 @@ namespace MARS
 			MouseMovedEvent _Event((float)xPos, (float)yPos);
 			_Data.EventCallbackFunction(_Event);
 		});
+
+		Log::Get(LogInit).Info("Windows Platform Init Complete");
 	}
 
 	void Windows_PlatformHandler::ShutdownWindow()
 	{
+		m_Context->Shutdown();
+		delete m_Context;
 		glfwDestroyWindow(m_Window);
 	}
 

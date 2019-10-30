@@ -37,7 +37,7 @@ float MARS::WindowsInput::GetMouseY_Implementation()
 	return y;
 }
 
-std::pair<float, float> MARS::WindowsInput::GetMousePos_Implementation()
+std::pair<double, double> MARS::WindowsInput::GetMousePos_Implementation()
 {
 	auto _Window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 	double xPos, yPos;

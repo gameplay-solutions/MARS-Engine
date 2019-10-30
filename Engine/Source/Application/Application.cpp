@@ -1,6 +1,7 @@
 #include "Application/Application.h"
 #include "glad/glad.h"
 #include "Input/InputHandler.h"
+#include "UserInterface/ImGuiLayer.h"
 
 namespace MARS
 {
@@ -32,16 +33,17 @@ namespace MARS
 	{
 		while (bRunning)
 		{
-			glClearColor(0.1, 0.1, 0.1, 1);
+			glClearColor((GLfloat)0.1, (GLfloat)0.1, (GLfloat)0.1, 1.0);
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			ImGuiLayerPtr->OnBegin();
 			for (auto* Element : m_LayerStack) 
 			{
-				Element->OnUpdate();
+				/*Element->OnUpdate();*/
 				Element->RenderLayerUI();
 			}
 			ImGuiLayerPtr->OnEnd();
+
 
 			WindowPtr->Refresh();
 		}
