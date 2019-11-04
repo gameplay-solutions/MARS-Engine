@@ -1,6 +1,4 @@
-#include "Core/EngineCore.h"
-
-#ifdef PLATFORM_WINDOWS
+#if 1 // this is here until I rework the EngineCore header
 
 extern MARS::Application* MARS::CreateApplication();
 

@@ -1,27 +1,25 @@
 #pragma once
 
-#include <cassert>
-// @TEMPHACK: Will eventually have a custom Assert macro lib
+#include "EngineCore.h"
 
-#ifdef DEBUG
-#define assertCheck assert
-#else
-#define assertCheck (void)
-#endif
-
-/*
- *	repeat of the PLATFORM_WINDOWS macro in EngineCore to avoid circle include
- **/
-#if defined(WIN32) || defined(__WIN32) || defined(__WIN32__) || defined(WIN64) || defined(__WIN64)
-#define Assert(x, y)\
+#define Assertf(x, ...)\
 {\
 	if (!(x))\
 	{\
-		Log::Write(LI_Fatal, LogError, y);\
-		__debugbreak();\
+		Log::Get(LogError).Fatal("Assertion Failed: {}", __VA_ARGS__);\
+		PLATFORM_DEBUG_BREAK();\
+		CA_ASSUME(false);\
 	}\
 };
 
-#else
-	// only supports windows atm
-#endif
+#define Assert(x)\
+{\
+	if (!(x))\
+	{\
+		PLATFORM_DEBUG_BREAK();\
+		CA_ASSUME(false);\
+	}\
+};
+
+#define NoEntry() Assert(!"This should never be called")
+#define Unimplemented() Assert(!"Function requires implementation")

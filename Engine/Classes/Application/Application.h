@@ -1,10 +1,15 @@
 #pragma once
 
-#include "Core/EngineCore.h"
+#include "CoreMinimal.h"
 #include "Application/Window.h"
 #include "Core/Events/ApplicationEvent.h"
+#include "Rendering/VertexArray.h"
+#include "Rendering/IndexBuffer.h"
+#include "Rendering/VertexBuffer.h"
+#include "Rendering/Shader.h"
+#include "Rendering/OrthoCamera.h"
 
-namespace MARS
+inline namespace MARS
 {
 	class Layer;
 	class ImGuiLayer;
@@ -33,17 +38,30 @@ namespace MARS
 		inline Window& GetWindow() { return *WindowPtr; }
 		inline static Application& Get() { return *Instance; }
 
+		static OutputLog GlobalOutputLog;
+
 	private:
 
 		void Run();
 
 		bool OnWindowClose(WindowCloseEvent& e);
 
+		static Application* Instance;
 		std::unique_ptr<Window> WindowPtr;
 		bool bRunning = false;
 		MStack<Layer> m_LayerStack;
-		static Application* Instance;
 		ImGuiLayer* ImGuiLayerPtr;
+		std::shared_ptr<Shader> m_Shader;
+		std::shared_ptr<VertexBuffer> m_VertBuffer;
+		std::shared_ptr<IndexBuffer> m_IndexBuffer;
+		std::shared_ptr<VertexArray> m_VertArray;
+
+		std::shared_ptr<Shader> m_Shader2;
+		std::shared_ptr<VertexBuffer> SQ_VertBuffer;
+		std::shared_ptr<IndexBuffer>  SQ_IndexBuffer;
+		std::shared_ptr<VertexArray>  SQ_VertArray;
+
+		OrthographicCamera Camera;
 	};
 
 	Application* CreateApplication();

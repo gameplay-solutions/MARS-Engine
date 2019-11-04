@@ -9,7 +9,7 @@
  *	Offset.x && Mouse.y
  **/
 
-namespace MARS
+inline namespace MARS
 {
 	class EXPORT_TYPE MouseMovedEvent : public Event
 	{

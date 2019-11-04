@@ -1,11 +1,12 @@
 #pragma once
 
-#include "Application/Window.h"
+#include "CoreMinimal.h"
+#include "Application\Window.h"
 #include "Rendering/RenderContext.h"
 
 struct GLFWwindow;
 
-namespace MARS
+inline namespace MARS
 {
 	/** 
 	 *	Handle Microsoft Windows platform specific operations here

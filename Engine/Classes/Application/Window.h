@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Core/EngineCore.h"
+#include "CoreMinimal.h"
 
-namespace MARS
+inline namespace MARS
 {
 	struct WindowProps
 	{
@@ -16,7 +16,7 @@ namespace MARS
 		{}
 	};
 
-	class EXPORT_TYPE Window
+	class Window
 	{
 	public:
 

@@ -3,6 +3,8 @@
 #include "fmt/chrono.h"
 #include "fmt/color.h"
 #include <map>
+#include "Application/Application.h"
+#include "UserInterface/OutputLog.h"
 
 #define Entry_LogType(Name, Idx) #Name ,
 static std::string LOG_TYPE_NAMES[LogMAX] =
@@ -128,6 +130,8 @@ void Log::PrintLog(const LogType Type, const std::string& LogText, uint64 Timest
 {
 	if (Timestamp == uint64(-1)) Timestamp = system_clock::now().time_since_epoch().count();
 
+	Application::GlobalOutputLog.AddLog(LogText.c_str());
+
 	/** @todo(devlinw): can we retrieve local hour or UTC offset easier than this? */
 	tm TM;
 	auto Dur = system_clock::duration(Timestamp);
@@ -144,6 +148,7 @@ void Log::PrintLog(const LogType Type, const std::string& LogText, uint64 Timest
 	#pragma warning(push)
 	#pragma warning(disable:4127)//constexpr if in library
 	std::cout << fmt::format("({:0>2}:{:%M:%S}) [{}]:{} {} \x1b[0m\n", TM.tm_hour % 12, Dur, LOG_TYPE_NAMES[Type], ColorEscapeCode.c_str(), LogText);
+
 	#pragma warning(pop)
 }
 

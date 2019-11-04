@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Core/EngineCore.h"
+#include "CoreMinimal.h"
 #include "Input/InputHandler.h"
 
-namespace MARS
+inline namespace MARS
 {
 	class WindowsInput : public Input
 	{
