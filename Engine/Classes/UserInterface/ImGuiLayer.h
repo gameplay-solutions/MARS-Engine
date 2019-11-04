@@ -2,7 +2,7 @@
 
 #include "Core/Layers/Layer.h"
 
-namespace MARS
+inline namespace MARS
 {
 	class EXPORT_TYPE ImGuiLayer : private Layer
 	{

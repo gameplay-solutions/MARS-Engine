@@ -5,14 +5,22 @@
 MARS::OpenGLContext::OpenGLContext(GLFWwindow* WindowHandle)
 	: m_WindowHandle(WindowHandle)
 {
-	Assert(m_WindowHandle, "WindowHandle is nullptr")
+	Assertf(m_WindowHandle, "WindowHandle is nullptr")
 }
 
 void MARS::OpenGLContext::Init()
 {
 	glfwMakeContextCurrent(m_WindowHandle);
 	int32 Status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-	Assert(Status, "Failed to Init GLAD")
+	Assertf(Status, "Failed to Init GLAD")
+
+	String _Version = (char*)glGetString(GL_VERSION);
+	APIName = "OpenGL " + _Version;
+
+	Log::Get(LogInit).Info("OpenGL Context Created.");
+	Log::Get(LogInit).Warning(" Hardware Vender:	{}", glGetString(GL_VENDOR));
+	Log::Get(LogInit).Warning(" Hardware Model:	{}", glGetString(GL_RENDERER));
+	Log::Get(LogInit).Warning(" OpenGL Version:	{}", glGetString(GL_VERSION));
 }
 
 void MARS::OpenGLContext::SwapBuffers()
@@ -22,7 +30,7 @@ void MARS::OpenGLContext::SwapBuffers()
 
 String MARS::OpenGLContext::GetAPIFullName()
 {
-	return "OpenGL v4.3";
+	return APIName;
 }
 
 String MARS::OpenGLContext::GetAPIName()

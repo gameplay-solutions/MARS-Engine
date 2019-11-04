@@ -1,13 +1,13 @@
 #include "Windows_PlatformHandler.h"
-#include "Core/Events/ApplicationEvent.h"
-#include "Core/Events/MouseEvent.h"
-#include "Core/Events/KeyEvent.h"
-#include "Rendering/OpenGL/OpenGLContext.h"
-#include "GLFW/glfw3.h"
+#include "GLFW\glfw3.h"
+#include "Rendering\OpenGL\OpenGLContext.h"
+#include "Core\Events\ApplicationEvent.h"
+#include "Core\Events\KeyEvent.h"
+#include "Core\Events\MouseEvent.h"
 
 static bool s_bGLFWInit = false;
 
-namespace MARS
+inline namespace MARS
 {
 
 	Windows_PlatformHandler::Windows_PlatformHandler(const WindowProps& Props)
@@ -52,7 +52,6 @@ namespace MARS
 		return Data.VSync;
 	}
 
-
 	void* Windows_PlatformHandler::GetNativeWindow() const
 	{
 		return m_Window;
@@ -64,11 +63,10 @@ namespace MARS
 		Data.Width = Props.Width;
 		Data.Height = Props.Height;
 
-		Log::Get(LogInit).Info("Constructing a {0}-{1} Window using {2}", Data.Width, Data.Height, "OpenGL 4.3");
 		if (!s_bGLFWInit)
 		{
 			int32 SuccessCode = glfwInit();
-			Assert(SuccessCode, "Could not Initialize GLFW")
+			Assertf(SuccessCode, "Could not Initialize GLFW")
 			glfwSetErrorCallback([](int32 Error, const char* Desc){ Log::Get(LogError).Error("GLFW Error {0} : {1}", Error, Desc); });
 			s_bGLFWInit = true;
 		}
@@ -76,6 +74,7 @@ namespace MARS
 		m_Window = glfwCreateWindow((int)Props.Width, (int)Props.Height, Data.Title.c_str(), nullptr, nullptr);
 		m_Context = new OpenGLContext(m_Window);
 		m_Context->Init();
+		Log::Get(LogInit).Info("Constructing a {0}-{1} Window using {2}", Data.Width, Data.Height, m_Context->GetAPIFullName().c_str());
 
 		Log::Get(LogInit).Info("{} constructed. Running Platform Init", Data.Title);
 		glfwSetWindowUserPointer(m_Window, &Data);

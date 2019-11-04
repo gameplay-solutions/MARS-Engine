@@ -2,7 +2,7 @@
 
 #include "Event.h"
 
-namespace MARS
+inline namespace MARS
 {
 	class EXPORT_TYPE WindowResizeEvent : public Event
 	{

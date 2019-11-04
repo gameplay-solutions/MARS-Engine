@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Core/EngineCore.h"
+#include "CoreMinimal.h"
 
-namespace MARS
+inline namespace MARS
 {
 	/** @todo(Chrisr): Maybe have this be stored in an .ini and setup by MHT? */
 	enum class EventType
@@ -38,7 +38,7 @@ namespace MARS
 
 	#define EVENT_CLASS_CATEGORY(x) virtual int32 GetCategoryFlags() const override { return x; }
 
-	class EXPORT_TYPE Event
+	class Event
 	{
 		friend class EventDispatcher;
 

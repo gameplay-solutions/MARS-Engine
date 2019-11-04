@@ -7,6 +7,7 @@
 #include "Application/Application.h"
 
 #include <GLFW/glfw3.h>
+#include "UserInterface/OutputLog.h"
 
 MARS::ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer") {}
 MARS::ImGuiLayer::~ImGuiLayer() { Log::Get(LogTemp).Info("ImGuiLayer Shutdown"); }
@@ -55,7 +56,8 @@ void MARS::ImGuiLayer::OnBegin()
 
 void MARS::ImGuiLayer::RenderLayerUI()
 {
-	ImGui::ShowDemoWindow(&bShowDebugMenu);
+	ImGui::SetNextWindowSize(ImVec2(500, 400), ImGuiCond_FirstUseEver);
+	Application::GlobalOutputLog.Draw("Output Log", &bShowDebugMenu);
 }
 
 void MARS::ImGuiLayer::OnEnd()

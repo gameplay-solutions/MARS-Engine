@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Core/EngineCore.h"
+#include "CoreMinimal.h"
 
-namespace MARS
+inline namespace MARS
 {
 	class EXPORT_TYPE Layer
 	{

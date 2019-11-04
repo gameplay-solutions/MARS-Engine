@@ -4,7 +4,7 @@
 
 struct GLFWwindow;
 
-namespace MARS
+inline namespace MARS
 {
 	class OpenGLContext : public RenderContext
 	{
@@ -21,5 +21,6 @@ namespace MARS
 	private:
 
 		GLFWwindow* m_WindowHandle;
+		String APIName;
 	};
 }
