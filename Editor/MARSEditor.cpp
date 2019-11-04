@@ -24,7 +24,9 @@ public:
 	{
 		PushLayer(new DetailsPanel());
 	}
-	~MARSEditor(){}
+	~MARSEditor()
+	{
+	}
 };
 
 MARS::Application* MARS::CreateApplication()

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/EngineCore.h"
+#include "CoreMinimal.h"
 
 inline namespace MARS {
 inline namespace DataTypes

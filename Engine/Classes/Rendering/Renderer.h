@@ -1,21 +1,38 @@
 #pragma once
 
-#include "glad/glad.h"
-#include "Core/EngineCore.h"
+#include "CoreMinimal.h"
+#include "Rendering/RenderTypes.h"
+#include "RenderAPI.h"
 
-namespace MARS
+inline namespace MARS
 {
-	/** 
-	 *	This class maintains a render buffer queue, sorts the buffer, 
-	 *	and manages multiple render passes and render buffers 
-	 **/
-	class EXPORT_TYPE FRenderer
+	class VertexArray;
+	class OrthographicCamera;
+
+	struct Renderer
+	{
+		static void BeginScene(OrthographicCamera& InCamera);
+		static void EndScene();
+		static void Submit(const std::shared_ptr<VertexArray>& InVertexArray);
+		static void Flush();
+
+		FORCEINLINE static GraphicsAPI GetAPI() { return RenderAPI::GetAPI(); }
+
+	private:
+
+	};
+
+	class RenderCommands
 	{
 	public:
 
-		void Init(GLADloadproc LoadProc);
+		static void Clear();
+		static void SetClearColor(const LinearColor& NewColor);
+		static void DrawIndexed(const std::shared_ptr<VertexArray>& InVertexArray);
 
-		void SetRenderSize(uint32 NewWidth, uint32 NewHeight);
-		FORCEINLINE glm::vec2 GetRenderSize();
+	private:
+
+		static RenderAPI* m_RenderAPI;
 	};
+
 }

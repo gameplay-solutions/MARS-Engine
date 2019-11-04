@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Types\CoreTypes.h"
+#include "Types\CoreTypes.hpp"
 #include <utility>
 
-namespace MARS
+inline namespace MARS
 {
 	class Input
 	{

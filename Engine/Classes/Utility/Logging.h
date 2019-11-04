@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/EngineCore.h"
+#include "CoreMinimal.h"
 
 // #define Entry_LogType(Name, Idx)
 #pragma warning(push)
@@ -55,11 +55,11 @@ __forceinline LogTypeFlags operator|(const LogTypeFlags& LHS, const LogTypeFlags
 /// We could ALSO have this be a full on hex code but at THIS time I'm not supporting it.
 // #define Entry_LogImportance(Name, Idx, Color)
 
-#define Entries_LogImportance \
-Entry_LogImportance(LI_Ancillary, 0, gray) \
-Entry_LogImportance(LI_Info, 1, white) \
-Entry_LogImportance(LI_Warning, 2, pale_golden_rod) \
-Entry_LogImportance(LI_Error, 3, tomato) \
+#define Entries_LogImportance							\
+Entry_LogImportance(LI_Ancillary, 0, gray)				\
+Entry_LogImportance(LI_Info, 1, white)					\
+Entry_LogImportance(LI_Warning, 2, pale_golden_rod)		\
+Entry_LogImportance(LI_Error, 3, tomato)				\
 Entry_LogImportance(LI_Fatal, 4, red)
 
 #define Entry_LogImportance(Name, Idx, Color) Name = Idx,
@@ -152,9 +152,12 @@ public:
 	 *	Writes a single formatted message to the log as Fatal, and allows variadic arguments.
 	 **/
 	template<class ... T>
-	void Fatal(const std::string& LogText, T...Args)
+	void Fatal(const std::string& LogText, T...Args, const bool bAssert = true)
 	{
+		//Assertf(false, LogText); // @hack(Chrisr): temp hack for Fatal log function. Breaks the editor via the MARS Assert macro (only in debug mode)
+
 		Write(fmt::format(LogText, Args...), LI_Fatal);
+		Assert(!bAssert);
 	}
 
 	/** 
@@ -224,7 +227,8 @@ public:
 	/** @note(devlinw): chris thinks logging to a file might be cool */
 
 private:
-
+	
+	friend class OutputLog;
 	static void PrintLog(const LogEntry& Log);
 	static void PrintLog(const LogType Type, const std::string& LogText, uint64 Timestamp, const LogImportance Importance = LI_Info);
 };

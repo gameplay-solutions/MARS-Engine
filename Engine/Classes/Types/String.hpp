@@ -1,19 +1,32 @@
 #pragma once
 
-#include "Types/CoreTypes.h"
+#include "Types/CoreTypes.hpp"
 
 /** @TODO(Chrisr): Implement custom String class */
 // @TEMPHACK: The string class won't use std::string
 #include <string>
+#include "Array.hpp"
 using String = std::string;
 
 class MString
 {
+ 	using DataType = Array<CHAR>;
+ 	using Data = DataType;
 
 public:
 
-	MString(const std::string& From){}
-	MString(const std::string&& From){}
-	MString(const char* From){}
-	MString(const char** From){}
+	void Add(const CHAR* InStr)
+	{
+		
+	}
+
+	void Add(const CHAR& InStr)
+	{
+
+	}
+
+	void Add(CHAR&& InStr)
+	{
+
+	}
 };
