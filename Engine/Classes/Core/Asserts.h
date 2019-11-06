@@ -21,5 +21,7 @@
 	}\
 };
 
+
+#define Check(x) Assert(x) // Honestly, this is here cause I have a heavy UE4 background
 #define NoEntry() Assert(!"This should never be called")
 #define Unimplemented() Assert(!"Function requires implementation")

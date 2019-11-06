@@ -4,7 +4,7 @@
 
 inline namespace MARS
 {
-	class EXPORT_TYPE Layer
+	class Layer
 	{
 	public:
 
@@ -12,18 +12,19 @@ inline namespace MARS
 		virtual ~Layer();
 
 
-		virtual void OnEnd()					{}
-		virtual void OnBegin()					{}
-		virtual void OnAttach()					{}
-		virtual void OnDetach()					{}
-		virtual void OnUpdate()					{}
-		virtual void RenderLayerUI()			{}
-		virtual void OnEvent(Event& InEvent)	{}
+		virtual void OnEnd()									{}
+		virtual void OnBegin()									{}
+		virtual void OnAttach()									{}
+		virtual void OnDetach()									{}
+		virtual void OnUpdate()									{}
+		virtual void RenderLayerUI(bool* bRender = nullptr)		{}
+		virtual void OnEvent(Event& InEvent)					{}
 
 
 		inline const String& GetName() const { return DebugName; }
+		bool bDrawUserInterface;
 
-	protected:
+	private:
 
 		String DebugName;
 	};

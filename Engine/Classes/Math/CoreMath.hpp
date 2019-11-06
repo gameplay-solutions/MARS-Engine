@@ -70,15 +70,51 @@
 
 /* @todo(chrisr): implement a math helper struct so we don't have to use glm */
 
-struct OrthoGraphicMatrix
+inline namespace MARS{
+inline namespace MATH
 {
-	float Left, Right, Top, Bottom, Near, Far;
+	struct OrthoGraphicMatrix
+	{
+		float Left, Right, Top, Bottom, Near, Far;
+	
+		OrthoGraphicMatrix()
+			: Left(0), Right(0), Top(0), Bottom(0), Near(0), Far(0)
+		{}
+	
+		OrthoGraphicMatrix(float InLeft, float InRight, float InTop, float InBottom, float InNear, float InFar)
+			: Left(InLeft), Right(InRight), Top(InTop), Bottom(InBottom), Near(InNear), Far(InFar)
+		{}
+	};
+	
+	struct Math
+	{
+		static FORCEINLINE float Sin(float  Val)			{	return sinf(Val);	}
+		static FORCEINLINE float ASin(float Val)			{	return asinf(Val);	}
+		static FORCEINLINE float Sinh(float Val)			{	return sinh(Val);	}
+		static FORCEINLINE float Cos(float  Val)			{	return cos(Val);	}
+		static FORCEINLINE float ACos(float Val)			{	return acos(Val);	}
+		static FORCEINLINE float Tan(float  Val)			{	return tan(Val);	}
+		static FORCEINLINE float ATan(float Val)			{	return atan(Val);	}
+		static FORCEINLINE float Sqrt(float Val)			{	return sqrtf(Val);	}
+		static FORCEINLINE float Pow(float  A, float B)		{	return powf(A, B);	}
 
-	OrthoGraphicMatrix()
-		: Left(0), Right(0), Top(0), Bottom(0)
-	{}
+		static constexpr FORCEINLINE int32 TruncToInt(float In) { return (int32)In; }
+		static constexpr FORCEINLINE float TruncToFloat(float In) { return (float)TruncToInt(In); }
+		static FORCEINLINE float FloorToInt(float In) { return floorf(In); }
 
-	OrthoGraphicMatrix(float InLeft, float InRight, float InTop, float InBottom, float InNear, float InFar)
-		: Left(InLeft), Right(InRight), Top(InTop), Bottom(InBottom), Near(InNear), Far(InFar)
-	{}
-};
+		template<typename Type> 
+		static constexpr FORCEINLINE Type Min(const Type A, const Type B) { return (A <= B) ? A : B; }
+
+		template<typename Type> 
+		static constexpr FORCEINLINE Type Max(const Type A, const Type B) { return (A >= B) ? A : B; }
+
+		template<typename Type> 
+		static constexpr FORCEINLINE Type Abs(const Type A) { return (A >= (Type)0) ? A : -A; }
+
+		template<typename Type> 
+		static constexpr FORCEINLINE Type Sign(const Type A) { return (A > (Type)0) ? (Type)1 : ((A < (Type)0)) ? (Type)-1 : (Type)0; }
+
+		template<typename Type> 
+		static constexpr FORCEINLINE Type Clamp(const Type InX, const Type InMin, const Type InMax) { return InX <= InMax ? (InX >= InMin ? InX : InX = InMin) : InX = InMax; }
+	};
+}}

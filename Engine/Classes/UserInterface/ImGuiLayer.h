@@ -4,27 +4,28 @@
 
 inline namespace MARS
 {
-	class EXPORT_TYPE ImGuiLayer : private Layer
+	class ImGuiLayer : public Layer
 	{
 	public:
 
 		virtual void OnAttach() override;
 		virtual void OnDetach() override;
-		virtual void RenderLayerUI() override;
+		virtual void RenderLayerUI(bool* bRender) override;
 
 		virtual void OnBegin() override;
 		virtual void OnEnd() override;
 
-		friend class Application;
-
 	protected:
 
-		float m_Time = 0.f;
-		static bool bShowDebugMenu;
+		ImGuiLayer(const String& InWindowName);
+		~ImGuiLayer();
+
+		static bool bShowDemoWindow;
 
 	private:
 
-		ImGuiLayer();
-		~ImGuiLayer();
+		friend class Application;
+		float m_Time = 0.f;
+
 	};
 }

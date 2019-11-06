@@ -31,13 +31,15 @@
 /**
  * MARS Data Types and Containers
  */
+#include "Types/CoreTypes.hpp"
 #include "Types/String.hpp"
 #include "Types/Array.hpp"
-#include "Types/CoreTypes.hpp"
 #include "Types/Stack.hpp"
 #include "Types/Map.hpp"
 #include "Types/Pair.hpp"
 #include "Types/SmartPointer.hpp"
+#include "Utility/Delegate.hpp"
+#include "Utility/DelegateDefines.hpp"
 
 /*
  *	Core MARS Classes
@@ -45,7 +47,7 @@
 #include "Core/Asserts.h"
 #include "Core/Events/Event.h"
 #include "fmt/format.h"
-#include "Utility/Logging.h"
+#include "Utility/Logging.hpp"
 #include "Math/CoreMath.hpp" // @HACK
 /*
  *	MARS Math Lib

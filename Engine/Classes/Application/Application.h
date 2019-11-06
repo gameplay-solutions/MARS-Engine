@@ -37,20 +37,15 @@ inline namespace MARS
 
 		inline Window& GetWindow() { return *WindowPtr; }
 		inline static Application& Get() { return *Instance; }
+		inline static ImGuiLayer* GetImGuiLayer() { return ImGuiLayerPtr; }
 
-		static OutputLog GlobalOutputLog;
-
-	private:
+	protected:
 
 		void Run();
 
 		bool OnWindowClose(WindowCloseEvent& e);
 
-		static Application* Instance;
-		std::unique_ptr<Window> WindowPtr;
-		bool bRunning = false;
 		MStack<Layer> m_LayerStack;
-		ImGuiLayer* ImGuiLayerPtr;
 		std::shared_ptr<Shader> m_Shader;
 		std::shared_ptr<VertexBuffer> m_VertBuffer;
 		std::shared_ptr<IndexBuffer> m_IndexBuffer;
@@ -62,7 +57,21 @@ inline namespace MARS
 		std::shared_ptr<VertexArray>  SQ_VertArray;
 
 		OrthographicCamera Camera;
-	};
 
+	private:
+
+		virtual void UpdateLayers() const;
+
+		static ImGuiLayer* ImGuiLayerPtr;
+		static Application* Instance;
+		std::unique_ptr<Window> WindowPtr;
+		bool bRunning = false;
+	};
+}
+
+/** We want to force the MARS namespace for these two functions to avoid confusion */
+namespace MARS
+{
 	Application* CreateApplication();
+	ImGuiLayer* CreateImGuiLayer();
 }

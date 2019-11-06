@@ -2,8 +2,9 @@
 
 #include "CoreMinimal.h"
 #include "imgui/imgui.h"
+#include "Core/Layers/Layer.h"
 
-class OutputLog
+class OutputLog : Layer
 {
 	struct ImGuiTextBuffer		Buffer;
 	struct ImGuiTextFilter		Filter;
@@ -13,8 +14,15 @@ class OutputLog
 
 public:
 
+	OutputLog(const String& InWindowName);
+
 	void Clear();
 	void AddLog(const char* Str);
-	void Draw(const char* Title, bool* bOpen);
+
+	virtual void RenderLayerUI(bool* bRender = nullptr) override;
+
+protected:
+
+	void Draw(bool* bOpen);
 
 };
