@@ -18,6 +18,8 @@ inline namespace DataTypes
 		void PopElement(ElementType* InElementType);
 		void PopOverlay(ElementType* InElementOverlayType);
 
+		typename std::vector<ElementType*>::const_iterator begin() const { return ElementTypes.begin(); }
+		typename std::vector<ElementType*>::const_iterator end() const { return ElementTypes.end(); }
 		typename std::vector<ElementType*>::iterator begin() { return ElementTypes.begin(); }
 		typename std::vector<ElementType*>::iterator end() { return ElementTypes.end(); }
 

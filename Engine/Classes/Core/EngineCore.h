@@ -51,6 +51,10 @@ inline namespace MARS
 
 #define UNUSED_PROPERTY(x) (x);
 
+#define MAJOR_VERSION 0
+#define MINOR_VERSION 01f
+#define MARS_VERSION MAJOR_VERSION.MINOR_VERSION
+
 enum DEFAULT_CONSTRUCT
 {
 	ForceInit,

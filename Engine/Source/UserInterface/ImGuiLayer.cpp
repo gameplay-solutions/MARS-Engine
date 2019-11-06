@@ -7,12 +7,11 @@
 #include "Application/Application.h"
 
 #include <GLFW/glfw3.h>
-#include "UserInterface/OutputLog.h"
 
-MARS::ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer") {}
-MARS::ImGuiLayer::~ImGuiLayer() { Log::Get(LogTemp).Info("ImGuiLayer Shutdown"); }
+ImGuiLayer::ImGuiLayer(const String& InWindowName) : Layer(InWindowName) { Log::Get(LogGraphics).Info("ImGuiLayer Constructed"); }
+ImGuiLayer::~ImGuiLayer() { Log::Get(LogGraphics).Info("ImGuiLayer Destroyed"); }
 
-bool MARS::ImGuiLayer::bShowDebugMenu = true;
+bool MARS::ImGuiLayer::bShowDemoWindow = true;
 
 void MARS::ImGuiLayer::OnAttach()
 {
@@ -26,17 +25,17 @@ void MARS::ImGuiLayer::OnAttach()
 
 	ImGui::StyleColorsDark();
 
-	ImGuiStyle& style = ImGui::GetStyle();
+	ImGuiStyle& Style = ImGui::GetStyle();
 	if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
 	{
-		style.WindowRounding = 0.0f;
-		style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+		Style.WindowRounding = 0.0f;
+		Style.Colors[ImGuiCol_WindowBg].w = 1.0f;
 	}
 
-	Application& app = Application::Get();
-	GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
+	Application& App = Application::Get();
+	GLFWwindow* Window = static_cast<GLFWwindow*>(App.GetWindow().GetNativeWindow());
 
-	ImGui_ImplGlfw_InitForOpenGL(window, true);
+	ImGui_ImplGlfw_InitForOpenGL(Window, true);
 	ImGui_ImplOpenGL3_Init();
 }
 
@@ -54,10 +53,9 @@ void MARS::ImGuiLayer::OnBegin()
 	ImGui::NewFrame();
 }
 
-void MARS::ImGuiLayer::RenderLayerUI()
+void MARS::ImGuiLayer::RenderLayerUI(bool* bRender)
 {
-	ImGui::SetNextWindowSize(ImVec2(500, 400), ImGuiCond_FirstUseEver);
-	Application::GlobalOutputLog.Draw("Output Log", &bShowDebugMenu);
+	//ImGui::ShowDemoWindow(bRender);
 }
 
 void MARS::ImGuiLayer::OnEnd()
@@ -70,9 +68,9 @@ void MARS::ImGuiLayer::OnEnd()
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 	if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
 	{
-		GLFWwindow* backup_current_context = glfwGetCurrentContext();
+		GLFWwindow* BackupContext = glfwGetCurrentContext();
 		ImGui::UpdatePlatformWindows();
 		ImGui::RenderPlatformWindowsDefault();
-		glfwMakeContextCurrent(backup_current_context);
+		glfwMakeContextCurrent(BackupContext);
 	}
 }

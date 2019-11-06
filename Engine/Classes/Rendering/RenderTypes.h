@@ -25,7 +25,7 @@ inline namespace MARS
 		static double ColorToLinearColor_Pow22[256];
 		static double ColorToLinearColor_sRGB[256];
 
-		FORCEINLINE LinearColor(){ }
+		FORCEINLINE LinearColor() : R(0), G(0), B(0), A(0) { }
 		FORCEINLINE explicit LinearColor(DEFAULT_CONSTRUCT) : R(0.f), G(0.f), B(0.f), A(0.f) { }
 		constexpr FORCEINLINE LinearColor(float InR, float InG, float InB, float InA = 1.f) : R(InR), G(InG), B(InB), A(InA) { }
 		LinearColor(const Color& InColor);

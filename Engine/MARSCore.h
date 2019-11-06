@@ -58,8 +58,8 @@
 #include "Core/Layers/Layer.h"
 #include "Core/Layers/GameLayer.h"
 #include "Input/Keys.h"
-#include "Utility/Logging.h"
-#include "Utility/Tick.h"
+#include "Utility/Logging.hpp"
+#include "Utility/Tick.hpp"
 
 // @TODO(Chrisr): This include needs to be platform based. Probably a MHT thing
 #include "Platform/Windows/Windows_Input.h"

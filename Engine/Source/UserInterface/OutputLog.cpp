@@ -1,5 +1,11 @@
 #include "UserInterface/OutputLog.h"
 
+OutputLog::OutputLog(const String& InWindowName)
+	: Layer(InWindowName), bAutoScroll(true)
+{
+
+}
+
 void OutputLog::Clear()
 {
 	Buffer.clear();
@@ -10,6 +16,7 @@ void OutputLog::Clear()
 void OutputLog::AddLog(const char* Str)
 {
 	int32 OldSize = Buffer.size();
+	Buffer.appendf(Str);
 	for (int32 NewSize = Buffer.size(); OldSize < NewSize; OldSize++)
 	{
 		if (Buffer[OldSize] == '\n')
@@ -19,9 +26,14 @@ void OutputLog::AddLog(const char* Str)
 	}
 }
 
-void OutputLog::Draw(const char* Title, bool* bOpen = nullptr)
+void OutputLog::RenderLayerUI(bool* bRender)
 {
-	if (!ImGui::Begin(Title, bOpen))
+	Draw(bRender);
+}
+
+void OutputLog::Draw(bool* bOpen = nullptr)
+{
+	if (!ImGui::Begin(GetName().c_str(), bOpen))
 	{
 		ImGui::End();
 		return;
